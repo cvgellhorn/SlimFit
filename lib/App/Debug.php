@@ -1,7 +1,7 @@
 <?php
 
 /**
- * App Debug Class
+ * App Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
  * 
  * @author cvgellhorn
  */
