@@ -244,9 +244,7 @@ final class App
 		require_once 'App/Autoloader.php';
 		App_Autoloader::register();
 		
-		require_once APP_PATH . '/config/ini.php';
-		App_Ini::set($__configs);
-		
+		App_Ini::set(require APP_PATH . '/config/application.config.php');
 		App_Router::getInstance()->route(App_Request::getInstance());
 	}
 }
