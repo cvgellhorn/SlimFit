@@ -20,7 +20,7 @@ class App_Controller
 	private $_renderView = true;
 	
 	/**
-	 * @var bool Load action view
+	 * @var bool Load layout template
 	 */
 	private $_useTemplate = true;
 	
