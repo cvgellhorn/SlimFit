@@ -36,7 +36,7 @@ class App_Response
 	}
 	
 	/**
-	 * Set requested uri
+	 * Private construct cause single pattern implementation
 	 */
 	private function __construct() {}
 	
