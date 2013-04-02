@@ -20,5 +20,5 @@ set_include_path(implode(PATH_SEPARATOR, array(
 //-- Include main app class
 require_once 'App.php';
 
-//-- Run Application
+//-- Run Application test git
 App::run();
