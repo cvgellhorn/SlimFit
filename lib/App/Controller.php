@@ -39,7 +39,7 @@ class App_Controller
 	 */
 	protected $view;
 	
-	/*
+	/**
 	 * Controller Constructor
 	 */
 	public function __construct()
