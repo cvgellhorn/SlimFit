@@ -8,6 +8,14 @@
 class App_Auth_Identity extends App_Model
 {
 	/**
+	 * Get the current user id
+	 */
+	public function getId()
+	{
+		return $this->getData('id');
+	}
+	
+	/**
 	 * Get the current username
 	 */
 	public function getUsername()
