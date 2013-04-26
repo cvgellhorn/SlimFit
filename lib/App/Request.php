@@ -333,7 +333,7 @@ class App_Request
 		return $this;
 	}
 	
-	/*+
+	/**
 	 * Get the current request state
 	 */
 	public function isInternal()
