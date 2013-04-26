@@ -32,9 +32,13 @@ class App_Model implements ArrayAccess
 	/**
 	 * Get data from $this object
 	 */
-	public function getData()
+	public function getData($key = null)
 	{
-		return $this->_data;
+		if(null !== $key) {
+			return (isset($this->_data[$key])) ? $this->_data[$key] : null;
+		} else {
+			return $this->_data;
+		}
 	}
 	
 	/**
@@ -42,9 +46,13 @@ class App_Model implements ArrayAccess
 	 * 
 	 * @param array $data Data array
 	 */
-	public function setData($data)
+	public function setData($data, $value = null)
 	{
-		$this->_data = $data;
+		if(is_array($data)) {
+			$this->_data = $data;
+		} else {
+			$this->_data[$data] = $value;
+		}
 	}
 	
 	/**
