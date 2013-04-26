@@ -6,7 +6,7 @@
  * @author cvgellhorn
  */
 class App_Ini
-{	
+{
 	/**
 	 * @var App Settings
 	 */
@@ -41,7 +41,7 @@ class App_Ini
 		if (isset(self::$_data[$name]))
             return self::$_data[$name];
         else
-			throw new Exception(1000, 'Undefined ini property!');
+			return null;
 	}
 	
 	/**
