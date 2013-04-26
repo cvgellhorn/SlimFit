@@ -6,7 +6,7 @@
  * @author Rob Apodaca <rob.apodaca@gmail.com>
  * @copyright Copyright (c) 2009, Rob Apodaca
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link http://robap.github.com/php-router/
+ * @link https://github.com/robap/php-router
  * 
  * 
  * Modified Version:
