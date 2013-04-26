@@ -12,7 +12,7 @@ class App_Controller
 	 */
 	const DEFAULT_CONTROLLER = 'index';
 	const DEFAULT_ACTION = 'index';
-	const ACTION_SUFFIX = 'Act';
+	const ACTION_SUFFIX = 'Action';
 
 	/**
 	 * @var bool Load action view
