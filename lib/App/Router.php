@@ -10,13 +10,25 @@ require_once 'App/Router/Exception.php';
  */
 class App_Router
 {
-	//-- Instance implementation
+	/**
+	 * Single pattern implementation
+	 * 
+	 * @return Instance of App_Router
+	 */
 	private static $_instance = null;
 	
-	//-- App_Router_Router
+	/**
+	 * App router
+	 * 
+	 * @var App_Router_Router
+	 */
 	private $_router;
 	
-	//--App_Router_Dispatcher
+	/**
+	 * Dispatcher
+	 * 
+	 * @var App_Router_Dispatcher
+	 */
 	private $_dispatcher;
 	
 	/**
