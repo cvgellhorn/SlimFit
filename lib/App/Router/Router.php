@@ -19,13 +19,13 @@ class App_Router_Router
 	 * Stores the Route objects
 	 * @var array
 	 */
-	private $routes = array();
+	private $_routes = array();
 
 	/**
 	 * A prefix to prepend when calling getUrl()
 	 * @var string
 	 */
-	private $prefix = '';
+	private $_prefix = '';
 
 	/**
 	 * Object constructor. Optionally pass array of routes to add
@@ -43,7 +43,7 @@ class App_Router_Router
 	 */
 	public function setPrefix($prefix)
 	{
-		$this->prefix = $prefix;
+		$this->_prefix = $prefix;
 	}
 
 	/**
@@ -54,7 +54,7 @@ class App_Router_Router
 	 */
 	public function addRoute($name, $route)
 	{
-		$this->routes[$name] = $route;
+		$this->_routes[$name] = $route;
 		return $this;
 	}
 
@@ -66,7 +66,7 @@ class App_Router_Router
 	 */
 	public function addRoutes($routes)
 	{
-		$this->routes = array_merge($this->routes, $routes);
+		$this->_routes = array_merge($this->_routes, $routes);
 		return $this;
 	}
 
@@ -76,7 +76,7 @@ class App_Router_Router
 	 */
 	public function getRoutes()
 	{
-		return $this->routes;
+		return $this->_routes;
 	}
 
 	/**
@@ -90,11 +90,11 @@ class App_Router_Router
 	 */
 	public function getUrl($name, $args = array(), $prefixed = true)
 	{
-		if (true !== array_key_exists($name, $this->routes))
+		if (true !== array_key_exists($name, $this->_routes))
 			throw new Router_NamedPathNotFoundException;
 		
 		//-- Check for the correct number of arguments
-		$matchOk = (count($args) !== count($this->routes[$name]->getDynamicElements())) ? false : true;
+		$matchOk = (count($args) !== count($this->_routes[$name]->getDynamicElements())) ? false : true;
 
 		/*
 		 * This will assure arguments that are more specific are replaced before.
@@ -109,7 +109,7 @@ class App_Router_Router
 		}
 		uksort($args, 'sortMoreSpecific');
 
-		$path = $this->routes[$name]->getPath();
+		$path = $this->_routes[$name]->getPath();
 		foreach ($args as $argKey => $argValue) {
 			$path = str_replace($argKey, $argValue, $path, $count);
 			if (1 !== $count)
@@ -121,7 +121,7 @@ class App_Router_Router
 			throw new InvalidArgumentException;
 
 		if ($prefixed)
-			return $this->prefix . $path;
+			return $this->_prefix . $path;
 		else
 			return $path;
 	}
@@ -134,7 +134,8 @@ class App_Router_Router
 	 */
 	public function findRoute($uri)
 	{
-		foreach ($this->routes as $route) {
+		$uri = rtrim($uri, '/');
+		foreach ($this->_routes as $route) {
 			if (true === $route->matchMap($uri)) {
 				return $route;
 			}
