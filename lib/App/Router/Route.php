@@ -19,31 +19,31 @@ class App_Router_Route
 	 * The Route path consisting of route elements
 	 * @var string
 	 */
-	private $path;
+	private $_path;
 
 	/**
 	 * The name of the class that this route maps to
 	 * @var string
 	 */
-	private $class;
+	private $_class;
 
 	/**
 	 * The name of the class method that this route maps to
 	 * @var string
 	 */
-	private $method;
+	private $_method;
 
 	/**
 	 * Stores any set dynamic elements
 	 * @var array 
 	 */
-	private $dynamicElements = array();
+	private $_dynamicElements = array();
 
 	/**
 	 * Stores any arguments found when mapping
 	 * @var array 
 	 */
-	private $mapArguments = array();
+	private $_mapArguments = array();
 
 	/**
 	 * Class Constructor
@@ -62,7 +62,7 @@ class App_Router_Route
 	 */
 	public function setPath($path)
 	{
-		$this->path = $path;
+		$this->_path = $path;
 		return $this;
 	}
 
@@ -73,7 +73,7 @@ class App_Router_Route
 	 */
 	public function getPath()
 	{
-		return $this->path;
+		return $this->_path;
 	}
 
 	/**
@@ -83,7 +83,7 @@ class App_Router_Route
 	 */
 	public function setMapClass($class)
 	{
-		$this->class = $class;
+		$this->_class = $class;
 		return $this;
 	}
 
@@ -94,7 +94,7 @@ class App_Router_Route
 	 */
 	public function getMapClass()
 	{
-		return $this->class;
+		return $this->_class;
 	}
 
 	/**
@@ -104,7 +104,7 @@ class App_Router_Route
 	 */
 	public function setMapMethod($method)
 	{
-		$this->method = $method;
+		$this->_method = $method;
 		return $this;
 	}
 
@@ -114,7 +114,7 @@ class App_Router_Route
 	 */
 	public function getMapMethod()
 	{
-		return $this->method;
+		return $this->_method;
 	}
 
 	/**
@@ -125,7 +125,7 @@ class App_Router_Route
 	 */
 	public function addDynamicElement($key, $value)
 	{
-		$this->dynamicElements[$key] = $value;
+		$this->_dynamicElements[$key] = $value;
 		return $this;
 	}
 
@@ -135,7 +135,7 @@ class App_Router_Route
 	 */
 	public function getDynamicElements()
 	{
-		return $this->dynamicElements;
+		return $this->_dynamicElements;
 	}
 
 	/**
@@ -146,7 +146,7 @@ class App_Router_Route
 	 */
 	private function addMapArguments($key, $value)
 	{
-		$this->mapArguments[$key] = $value;
+		$this->_mapArguments[$key] = $value;
 	}
 
 	/**
@@ -155,7 +155,7 @@ class App_Router_Route
 	 */
 	public function getMapArguments()
 	{
-		return $this->mapArguments;
+		return $this->_mapArguments;
 	}
 
 	/**
@@ -174,7 +174,7 @@ class App_Router_Route
 		$pathToMatch = $parsed['path'];
 
 		//-- The process of matching is easier if there are no preceding slashes
-		$tempThisPath = preg_replace('/^\//', '', $this->path);
+		$tempThisPath = preg_replace('/^\//', '', $this->_path);
 		$tempPathToMatch = preg_replace('/^\//', '', $pathToMatch);
 
 		//-- Get the path elements used for matching later
@@ -202,11 +202,11 @@ class App_Router_Route
 			}
 
 			//-- Consult the dynamic array for help in matching
-			if (true === isset($this->dynamicElements[$thisPathElement])) {
+			if (true === isset($this->_dynamicElements[$thisPathElement])) {
 				//-- The dynamic array either contains a key like ':id' or a
 				// regular expression. In the case of a key, the key matches
 				// anything
-				if ($this->dynamicElements[$thisPathElement] === $thisPathElement) {
+				if ($this->_dynamicElements[$thisPathElement] === $thisPathElement) {
 					$possibleMatchString .= "/{$matchPathElements[$i]}";
 
 					//-- The class and/or method may be getting set dynamically. If so
@@ -223,7 +223,7 @@ class App_Router_Route
 				}
 
 				//-- Attempt a regular expression match
-				$regexp = '/' . $this->dynamicElements[$thisPathElement] . '/';
+				$regexp = '/' . $this->_dynamicElements[$thisPathElement] . '/';
 				if (preg_match($regexp, $matchPathElements[$i]) > 0) {
 					//-- The class and/or method may be getting set dynamically. If so
 					// extract them and set them
