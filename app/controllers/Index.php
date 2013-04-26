@@ -7,7 +7,7 @@
  */
 class Index extends App_Controller
 {
-	public function indexAct()
+	public function indexAction()
 	{
 		//$this->redirect('moep/index');
 		App_Debug::dump('Index -> indexAct');
