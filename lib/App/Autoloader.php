@@ -7,7 +7,11 @@
  */
 class App_Autoloader
 {
-	//-- Instance exists state
+	/**
+	 * Instance exists state
+	 * 
+	 * @var bool
+	 */
 	private static $_instance = false;
 	
 	/**
