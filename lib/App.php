@@ -139,6 +139,10 @@ final class App
 				$filePath = APP_PATH . DS . $type . DS . $file;
 				$file = $filePath;
 				break;
+			default:
+				$filePath = APP_PATH . DS . $type . DS . $file;
+				$file = $filePath;
+				break;
 		}
 		
 		if(file_exists($filePath)) {
