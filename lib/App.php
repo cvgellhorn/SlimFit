@@ -39,7 +39,7 @@ final class App
      * Private array of instances
      * 
      * @param bool $implode
-     * @return TCS version number
+     * @return string App lib version number
      */
     public static function getVersion($implode)
     {
@@ -56,7 +56,8 @@ final class App
 	/**
 	 * Main getBaseDir function
 	 *
-	 * @return application base dir
+	 * @param string $path Path addon
+	 * @return string Application base dir
 	 */
 	public static function getBaseDir($path = null)
 	{
@@ -67,7 +68,7 @@ final class App
 	/**
 	 * Get is dev mode
 	 *
-	 * @return development mode state
+	 * @return bool Development mode state
 	 */
 	public static function getDev()
 	{
@@ -77,7 +78,8 @@ final class App
 	/**
 	 * Global singleton implementation pattern
 	 *
-	 * @param string $class
+	 * @param string $class Class name
+	 * @param mixed $data Instance data
 	 * @return object Object of $class
 	 */
 	public static function getInstance($class, $data = null)
@@ -91,7 +93,7 @@ final class App
 	/**
 	 * Unset or unregister Instances
 	 *
-	 * @param string $class
+	 * @param string $class Class name
 	 */
 	public static function destructInstance($class)
 	{
@@ -117,8 +119,11 @@ final class App
 	 * Load lib class and get Instance
 	 * 
 	 * @param string $class Given lib class name
+	 * @param string $type Class type
+	 * @param mixed $data Object data
 	 * @param bool $instance Get singleton or object
-	 * @return Class of given name
+	 * @return mixed Object of given name
+	 * @throws App_Exception
 	 */
 	public static function getClass($class, $type, $data = null, $instance = false)
 	{
@@ -153,8 +158,9 @@ final class App
 	 * Load lib class and get Instance
 	 * 
 	 * @param string $class Given lib class name
+	 * @param mixed $data Instance data
 	 * @param bool $instance Get singleton or object
-	 * @return Class of given name
+	 * @return object Class of given name
 	 */
 	public static function getLib($class, $data = null, $instance = false)
 	{
@@ -165,8 +171,9 @@ final class App
 	 * Load lib class and get Instance
 	 * 
 	 * @param string $class Given lib class name
+	 * @param mixed $data Instance data
 	 * @param bool $instance Get singleton or object
-	 * @return Class of given name
+	 * @return object Class of given name
 	 */
 	public static function getController($class, $data = null, $instance = false)
 	{
@@ -177,8 +184,9 @@ final class App
 	 * Load lib class and get Instance
 	 * 
 	 * @param string $class Given lib class name
+	 * @param mixed $data Instance data
 	 * @param bool $instance Get singleton or object
-	 * @return Class of given name
+	 * @return object Class of given name
 	 */
 	public static function getModel($class, $data = null, $instance = false)
 	{
@@ -188,7 +196,8 @@ final class App
 	/**
 	 * Get global logger
 	 * 
-	 * @param String log file (logger)
+	 * @param string $file Log file (logger)
+	 * @param bool $addFirebug Add firebug streamwriter
 	 * @return object Zend_Log
 	 */
 	public static function getLogger($file = self::LOG_FILE_SYSTEM, $addFirebug = false)
@@ -208,11 +217,13 @@ final class App
 			$writer = new Zend_Log_Writer_Stream($logFile);
 			$logger = new Zend_Log($writer);
 			
-			/*if (self::getDev() || $addFirebug) {
+			/*
+			if (self::getDev() || $addFirebug) {
 				require_once 'Zend/Log/Writer/Firebug.php';
 				$logger->addWriter(new Zend_Log_Writer_Firebug());
-			}*/
-			
+			}
+			*/
+
 			self::$_loggers[$file] = $logger;
 		}
 		return self::$_loggers[$file];
@@ -235,7 +246,7 @@ final class App
 			$logger->log($message, $level);
 		} catch (Exception $e) {}
 	}
-	
+
 	/**
 	 * Run Application
 	 */
