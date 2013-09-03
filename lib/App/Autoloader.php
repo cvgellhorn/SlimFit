@@ -30,7 +30,7 @@ class App_Autoloader
 	/**
 	 * Autoloader method
 	 * 
-	 * @param string $className Class name
+	 * @param string $class Class name
 	 */
 	private static function loader($class)
 	{
