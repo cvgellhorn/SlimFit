@@ -10,7 +10,7 @@ class App_Request
 	//-- Instance implementation
 	private static $_instance = null;
 	
-	//-- Request uri, routerUri, controller and action
+	//-- Request options
 	private $_uri;
 	private $_routerUri;
 	private $_controller;
@@ -25,13 +25,13 @@ class App_Request
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return Instance of App_Request
+	 * @return App_Request
 	 */
 	public static function getInstance()
 	{
 		if (null === self::$_instance)
 			self::$_instance = new self();
-		
+
 		return self::$_instance;
 	}
 	
@@ -94,6 +94,7 @@ class App_Request
 	 * Set the current controller name
 	 * 
 	 * @param string $controller Controller name
+	 * @return App_Request
 	 */
 	public function setControllerName($controller)
 	{
@@ -115,6 +116,7 @@ class App_Request
 	 * Set the current action
 	 * 
 	 * @param string $name Action name
+	 * @return App_Request
 	 */
 	public function setActionName($name)
 	{
@@ -128,7 +130,7 @@ class App_Request
      * A $value of null will unset the $key if it exists
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed $val
      * @return App_Request
      */
 	public function setParam($key, $val)
@@ -167,7 +169,7 @@ class App_Request
 	/**
      * Get all action parameters
      *
-     * @return array
+     * @return array Request params
      */
 	public function getParams()
 	{
@@ -196,9 +198,8 @@ class App_Request
      */
 	public function getServer($key = null, $default = null)
 	{
-		if (null === $key) {
+		if (null === $key)
 			return $_SERVER;
-		}
 
 		return (isset($_SERVER[$key])) ? $_SERVER[$key] : $default;
 	}
@@ -214,9 +215,8 @@ class App_Request
      */
 	public function getGet($key = null, $default = null)
 	{
-		if (null === $key) {
+		if (null === $key)
 			return $_GET;
-		}
 
 		return (isset($_GET[$key])) ? $_GET[$key] : $default;
 	}
@@ -232,9 +232,8 @@ class App_Request
      */
 	public function getPost($key = null, $default = null)
 	{
-		if (null === $key) {
+		if (null === $key)
 			return $_POST;
-		}
 
 		return (isset($_POST[$key])) ? $_POST[$key] : $default;
 	}
@@ -246,27 +245,24 @@ class App_Request
      *
      * @param string $header HTTP header name
      * @return string|false HTTP header value, or false if not found
-     * @throws Zend_Controller_Request_Exception
      */
 	public function getHeader($header)
 	{
 		//-- Try to get it from the $_SERVER array first
 		$temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
-		if (isset($_SERVER[$temp])) {
+		if (isset($_SERVER[$temp]))
 			return $_SERVER[$temp];
-		}
 
 		//-- Seems to be the only way to get the Authorization header on Apache
 		if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
-			if (isset($headers[$header])) {
+			if (isset($headers[$header]))
 				return $headers[$header];
-			}
+
 			$header = strtolower($header);
 			foreach ($headers as $key => $value) {
-				if (strtolower($key) == $header) {
+				if (strtolower($key) == $header)
 					return $value;
-				}
 			}
 		}
 
@@ -290,11 +286,7 @@ class App_Request
 	 */
 	public function isPost()
 	{
-		if ('POST' == $this->getMethod()) {
-			return true;
-		}
-
-		return false;
+		return ('POST' == $this->getMethod()) ? true : false;
 	}
 
 	/**
@@ -304,11 +296,7 @@ class App_Request
 	 */
 	public function isGet()
 	{
-		if ('GET' == $this->getMethod()) {
-			return true;
-		}
-
-		return false;
+		return ('GET' == $this->getMethod()) ? true : false;
 	}
 	
 	/**

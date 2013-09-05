@@ -148,8 +148,15 @@ final class App
 		if(file_exists($filePath)) {
 			try {
 				require_once $file;
-				return ($instance) ? self::getInstance($class, $data) : 
-					($data) ? new $class($data) : new $class();
+
+				if ($instance)
+					return self::getInstance($class, $data);
+
+				if ($data) {
+					return new $class($data);
+				} else {
+					return new $class();
+				}
 			} catch (Exception $e) {
 				throw new App_Exception('Required class could not be loaded', 9998);
 			}
@@ -258,7 +265,7 @@ final class App
 	{
 		require_once 'App/Autoloader.php';
 		App_Autoloader::register();
-		
+
 		App_Ini::set(require APP_PATH . '/config/application.config.php');
 		App_Router::getInstance()->route(App_Request::getInstance());
 	}

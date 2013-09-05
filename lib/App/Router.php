@@ -13,7 +13,7 @@ class App_Router
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return Instance of App_Router
+	 * @return App_Router Instance
 	 */
 	private static $_instance = null;
 	
@@ -35,7 +35,7 @@ class App_Router
 	 * Single pattern implementation
 	 * 
 	 * @param App_Router_Route $route Defined allowed route
-	 * @return Instance of App_Router
+	 * @return App_Router Instance
 	 */
 	public static function getInstance($route = null)
 	{
@@ -90,7 +90,8 @@ class App_Router
 	/**
 	 * Private clone cause single pattern implementation
 	 */
-	private function __clone() {}
+	private function __clone()
+	{}
 	
 	/**
 	 * Get current router
@@ -113,7 +114,7 @@ class App_Router
 	}
 	
 	/**
-	 * Run routing
+	 * Do routing
 	 * 
 	 * @param App_Request $request Request object
 	 */

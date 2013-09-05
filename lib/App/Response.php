@@ -38,12 +38,14 @@ class App_Response
 	/**
 	 * Private construct cause single pattern implementation
 	 */
-	private function __construct() {}
+	private function __construct()
+	{}
 	
 	/**
 	 * Private clone cause single pattern implementation
 	 */
-	private function __clone() {}
+	private function __clone()
+	{}
 	
 	/**
 	 * Set header

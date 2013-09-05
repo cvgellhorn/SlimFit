@@ -30,47 +30,51 @@ class App_Controller
 	private $_useView;
 	
 	/**
-	 * @var Instance of App_Request
+	 * @var App_Request
 	 */
 	protected $request;
 	
 	/**
-	 * @var Instance of App_View
+	 * @var App_View
 	 */
 	protected $view;
 	
 	/**
-	 * Controller Constructor
+	 * Main controller constructor
 	 */
 	public function __construct()
 	{
 		$this->request = App_Request::getInstance();
 		$this->view = new App_View();
-		
+
+		//-- Call child constructor
 		$this->_init();
 	}
 	
 	/**
 	 * Constructor for child classes
 	 */
-	protected function _init() {}
+	protected function _init()
+	{}
 	
 	/**
 	 * Is called before an action is dispatched
 	 */
-	public function preDispatch() {}
+	public function preDispatch()
+	{}
 	
 	/**
 	 * Is called after an action is dispatched
 	 */
-	public function postDispatch() {}
+	public function postDispatch()
+	{}
 	
 	/**
 	 * Do App authentication
 	 */
 	public function __doAuth()
 	{
-		//-- Check Auth
+		//-- Do Auth
 		/*if($this->request->isInternal())
 			return;
 		
@@ -87,8 +91,8 @@ class App_Controller
 	public function __loadView()
 	{
 		if ($this->_renderView) {
-			$action = (null !== $this->_useView) ? $this->_useView 
-					: $this->request->getActionName();
+			$action = (null !== $this->_useView) ? $this->_useView :
+				$this->request->getActionName();
 			$controller = $this->request->getControllerName();
 			
 			if($this->request->isInternal() || !$this->_useTemplate) {
@@ -118,9 +122,9 @@ class App_Controller
 	/**
 	 * Set another view to render
 	 * 
-	 * @param type $view View to render
+	 * @param string $view View to render
 	 */
-	protected function setUseView($view)
+	protected function useView($view)
 	{
 		$this->_renderView = true;	
 		$this->_useView = $view;
@@ -129,7 +133,7 @@ class App_Controller
 	/**
 	 * Redirect to given uri
 	 * 
-	 * @param type $uri Uri to redirect
+	 * @param string $uri Uri to redirect
 	 */
 	protected function redirect($uri)
 	{

@@ -16,7 +16,8 @@ class App_View
 	/**
 	 * Constructor
 	 */
-	public function __construct() {}
+	public function __construct()
+	{}
 
 	/**
 	 * Get action content in default layout
@@ -31,6 +32,7 @@ class App_View
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
+	 * @throws App_Exception
 	 */
 	public function loadView($action, $controller)
 	{
@@ -53,6 +55,7 @@ class App_View
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
+	 * @throws App_Exception If main template not exists
 	 */
 	public function loadLayoutView($action, $controller)
 	{
@@ -74,9 +77,9 @@ class App_View
 	/**
 	 * Load controler action
 	 * 
-	 * @param string Action name
-	 * @param string Controller name
-	 * @param mixed Given action params
+	 * @param string $action Action name
+	 * @param string $controller Controller name
+	 * @param mixed $params Action params
 	 */
 	public function action($action, $controller, $params = array())
 	{
@@ -89,7 +92,7 @@ class App_View
 		//-- Route to new controller action
 		$request->setIsInternal();
 		App_Router::getInstance()->route($request->setUri(
-				App_Ini::get('base_path') . $controller . '/' . $action
-			));
+			App_Ini::get('base_path') . $controller . '/' . $action
+		));
 	}
 }

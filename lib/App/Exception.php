@@ -19,18 +19,10 @@ class App_Exception extends Exception
 
 		$logger = App::getLogger(App::LOG_FILE_ERROR);
 		$logger->log($this, Zend_Log::ERR);
-		
-		/*if (APP_ENV != 'development') {
-			$errMail = new App_Mail();
-			$errMail->setMailSubject('App Error');
-			$errMail->setMailTo('gellborn@gmail.com');
-			$errMail->setMailBody('[Error Code: '.$code.'] '.$this);
-			$errMail->sendMail();
-		}*/
 	}
 
 	/**
-	 * Getting errors in xmlHttpRequests
+	 * Getting errors in ajaxRequests
 	 */
 	public function toJson() 
 	{

@@ -37,9 +37,10 @@ class App_File
 	 */
 	public static function isAllowed($suffix)
 	{
-		if(strrpos($suffix, '.'))
+		if(strrpos($suffix, '.')) {
 			$suffix = pathinfo($suffix, PATHINFO_EXTENSION);
-		
+		}
+
 		$suffix = strtolower($suffix);
 		switch($suffix) {
 			case self::SUFFIX_PNG:
@@ -67,10 +68,11 @@ class App_File
 	 */
 	public static function getSize($file, $unit = self::UNIT_MB)
 	{
-		if (file_exists($file))
+		if (file_exists($file)) {
 			return round(filesize($file) / $unit, 2);
-		else
+		} else {
 			return 0;
+		}
 	}
 	
 	/**
@@ -81,15 +83,17 @@ class App_File
 	 */
 	public static function createDirIfNotExists($dir, $rec = false)
 	{
-		if (!is_dir($dir))
+		if (!is_dir($dir)) {
 			mkdir($dir, 0777, $rec);
+		}
 	}
 	
 	/**
 	 * Main upload file method (incl. logging)
 	 * 
-	 * @param String $file Temp file name
+	 * @param String $fileData Temp file name
 	 * @param String $path New file path
+	 * @throws App_Exception
 	 */
 	public static function upload($fileData, $path)
 	{
@@ -117,17 +121,19 @@ class App_File
 	 *
 	 * @param String $file Path with filename
 	 * @param bool $allSuffixes Delete all suffixes?
+	 * @throws App_Exception
 	 */
 	public static function delete($file, $allSuffixes = false)
 	{
 		try {
 			if($allSuffixes) {
 				$dotPos = strrpos($file, '.');
-				if(!$dotPos)
+				if(!$dotPos) {
 					$mask = $file . '.*';
-				else
+				} else {
 					$mask = substr($file, 0, $dotPos) . '.*';
-				
+				}
+
 				array_map('unlink', glob($mask));
 				App::log('File with all suffixes: ' . $file . ' successfully deleted', Zend_Log::INFO);
 			} else {
@@ -156,13 +162,15 @@ class App_File
 		}
 	}
 	
-	public static function rename() {}
+	public static function rename()
+	{}
 	
 	/**
 	 * App_File constructor
 	 *
 	 * @param string $fileName Filename
-	 * @return App_File
+	 * @param bool $newFile Create new file?
+	 * @throws App_Exception
 	 */
 	public function __construct($fileName = 'default.txt', $newFile = false)
 	{
@@ -181,6 +189,7 @@ class App_File
 						. '/' . $pathInfo['filename'] 
 						. '_' . time() 
 						. '.' . $pathInfo['extension'];
+
 					file_put_contents($file, '');
 					chmod($file, 0777);
 				}
@@ -221,10 +230,11 @@ class App_File
 	public function write($value, $newLine = false, $append = true)
 	{
 		$value = ($newLine) ? PHP_EOL . $value : $value;
-		if($append)
+		if($append) {
 			file_put_contents($this->_file, $value, FILE_APPEND | LOCK_EX);
-		else
+		} else {
 			file_put_contents($this->_file, $value, LOCK_EX);
+		}
 	}
 	
 	/**
