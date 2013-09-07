@@ -106,16 +106,6 @@ final class App
 	}
 	
 	/**
-	 * Get request instance
-	 * 
-	 * @return App_Request
-	 */
-	public static function getRequest()
-	{
-		return App_Request::getInstance();
-	}
-	
-	/**
 	 * Load lib class and get Instance
 	 * 
 	 * @param string $class Given lib class name
