@@ -217,13 +217,6 @@ final class App
 			
 			$writer = new Zend_Log_Writer_Stream($logFile);
 			$logger = new Zend_Log($writer);
-			
-			/*
-			if (self::getDev() || $addFirebug) {
-				require_once 'Zend/Log/Writer/Firebug.php';
-				$logger->addWriter(new Zend_Log_Writer_Firebug());
-			}
-			*/
 
 			self::$_loggers[$file] = $logger;
 		}
