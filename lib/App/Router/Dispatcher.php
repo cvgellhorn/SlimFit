@@ -34,7 +34,7 @@ class App_Router_Dispatcher
 	 */
 	public function __construct()
 	{
-		$this->suffix = '';
+		$this->suffix = App_Controller::CONTROLLER_SUFFIX;
 	}
 
 	/**
@@ -56,7 +56,7 @@ class App_Router_Dispatcher
 		//-- Set final default controller and action name
 		$controller = ('' === $c) ? App_Controller::DEFAULT_CONTROLLER : $c;
 		$action = ('' === $a) ? App_Controller::DEFAULT_ACTION : $a;
-		
+
 		//-- Add controller and action to request
 		$request->setControllerName($controller)
 				->setActionName($action);

@@ -30,9 +30,5 @@ class Moep extends App_Controller
 		} catch (App_Auth_Adapter_Exception $e) {
 			//-- Perform something
 		}
-		
-		/*App_Debug::dump('arguments: ');
-		App_Debug::dump($args);
-		App_Debug::dump($this->request->isAjaxRequest());*/
 	}
 }

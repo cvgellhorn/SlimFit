@@ -68,7 +68,7 @@ class App_Router
 				->addDynamicElement(':id', ':id');
 			
 			$this->_router->addRoutes(array(
-				'_default_'			=> new App_Router_Route($mainUri),
+				'_default_'			=> new App_Router_Route(rtrim($mainUri, '/')),
 				'_controller_'		=> $controllerRoute,
 				'_action_'			=> $actionRoute,
 				'_actionWithParam_'	=> $route
