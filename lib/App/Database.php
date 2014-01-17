@@ -215,11 +215,14 @@ class App_Database
 
 	public function insert($data, $table)
 	{
-		$query = 'INSERT INTO `' . $table . '`';
-		implode(', ', array_fill(0, count($data), '?'));
-		//$this->_execute();
+		$query = 'INSERT INTO `' . $table . '` ';
+		$query .= '(' . implode(', ', array_keys($data)) . ') ';
+		$query .= 'VALUES (' . implode(', ', array_fill(0, count($data), '?')) . ')';
 
-		return $this->_pdo->lastInsertId();
+		App_Debug::dump($query);
+
+		//$this->_execute();
+		//return $this->_pdo->lastInsertId();
 	}
 
 	public function multiInsert($meta, $values)
