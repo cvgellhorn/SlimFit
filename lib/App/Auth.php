@@ -24,14 +24,14 @@ class App_Auth
 	/**
 	 * Auth adapter
 	 * 
-	 * @var App_Auth_Adapter_Interface
+	 * @var App_Auth_Db
 	 */
 	private $_authAdapter = null;
 	
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return Instance of App_Request
+	 * @return App_Auth
 	 */
 	public static function getInstance()
 	{
@@ -39,6 +39,16 @@ class App_Auth
 			self::$_instance = new self();
 		
 		return self::$_instance;
+	}
+
+	/**
+	 * Get current user object
+	 *
+	 * @return App_Auth_Identity
+	 */
+	public static function getUser()
+	{
+		return self::getInstance()->getIdentity();
 	}
 	
 	/**
@@ -76,11 +86,12 @@ class App_Auth
 	 * 
 	 * @param App_Auth_Identity $identity Identity object
 	 * @return App_Auth
+	 * @throws App_Exception
 	 */
 	public function setIdentity(App_Auth_Identity $identity)
 	{
 		if($this->hasIdentity()) {
-			throw new App_Auth_Adapter_Exception('Can\'t set identity of already authenticated user');
+			throw new App_Exception('Can\'t set identity of already authenticated user');
 		}
 		
 		$this->_identity = $identity;
@@ -108,22 +119,21 @@ class App_Auth
 	/**
 	 * Get the current authentication adapter
 	 * 
-	 * @return App_Auth_Adapter_Interface
+	 * @return App_Auth_Db
+	 * @throws App_Exception
 	 */
 	public function getAdapter()
 	{
 		if (null === $this->_authAdapter) {
-			$adapter = App_Ini::get('auth_adapter');	
+			$adapter = App_Ini::get('auth')['adapter'];
 			switch($adapter) {
 				case 'db':
-					$adapterClass = new App_Auth_Adapter_Db();
-					break;
-				case 'ldap':
-					$adapterClass = new App_Auth_Adapter_Ldap();
+					$adapterClass = new App_Auth_Db();
 					break;
 				default:
-					$adapterClass = new App_Auth_Adapter_Db();
+					throw new App_Exception('Unknown Auth Adapter declared in application.config.php');
 					break;
+
 			}
 			$this->_authAdapter = $adapterClass;
 		}

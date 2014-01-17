@@ -805,3 +805,259 @@ Stack trace:
 #4 /Applications/XAMPP/xamppfiles/htdocs/default-app/lib/App.php(250): App_Router->route(Object(App_Request))
 #5 /Applications/XAMPP/xamppfiles/htdocs/default-app/public/index.php(25): App::run()
 #6 {main}
+2013-09-03T16:40:45+02:00 ERR (3): exception 'Router_BadClassNameException' with message 'Disallowed characters in class name PhpStorm-c88fcb18-6455-4fe7-ab58-f8516b7e3f9a.php' in C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php:74
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#1 C:\xampp\htdocs\default-app\lib\App.php(248): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-03T16:40:45+02:00 ERR (3): exception 'Router_BadClassNameException' with message 'Disallowed characters in class name PhpStorm-c88fcb18-6455-4fe7-ab58-f8516b7e3f9a.php' in C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php:74
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#1 C:\xampp\htdocs\default-app\lib\App.php(248): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-03T17:26:31+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(124): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(263): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-05T18:32:35+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(124): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(263): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-05T18:51:05+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(124): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(265): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-05T19:40:53+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(125): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(263): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-05T20:31:07+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(125): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(270): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:34:12+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(125): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(270): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:41:18+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(125): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(270): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:45:23+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(125): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:48:04+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:51:45+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:53:57+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:53:59+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:54:00+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:58:06+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:58:10+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:58:13+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:58:23+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:58:25+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:59:17+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/in...')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T19:59:20+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-appmoe...')
+#1 C:\xampp\htdocs\default-app\lib\App\View.php(96): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\app\views\index\index.phtml(3): App_View->action('test', 'moep')
+#3 C:\xampp\htdocs\default-app\lib\App\View.php(44): require_once('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\default-app\lib\App\View.php(27): App_View->loadView('index', 'index')
+#5 C:\xampp\htdocs\default-app\app\layout\default.phtml(7): App_View->_getContent()
+#6 C:\xampp\htdocs\default-app\lib\App\View.php(70): require_once('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\default-app\lib\App\Controller.php(102): App_View->loadLayoutView('index', 'index')
+#8 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(119): App_Controller->__loadView()
+#9 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(100): App_Router_Dispatcher->dispatchController('Index', 'indexAction', Array)
+#10 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#11 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#12 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#13 {main}
+2013-09-26T19:59:21+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-appmoe...')
+#1 C:\xampp\htdocs\default-app\lib\App\View.php(96): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\app\views\index\index.phtml(3): App_View->action('test', 'moep')
+#3 C:\xampp\htdocs\default-app\lib\App\View.php(44): require_once('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\default-app\lib\App\View.php(27): App_View->loadView('index', 'index')
+#5 C:\xampp\htdocs\default-app\app\layout\default.phtml(7): App_View->_getContent()
+#6 C:\xampp\htdocs\default-app\lib\App\View.php(70): require_once('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\default-app\lib\App\Controller.php(102): App_View->loadLayoutView('index', 'index')
+#8 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(119): App_Controller->__loadView()
+#9 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(100): App_Router_Dispatcher->dispatchController('Index', 'indexAction', Array)
+#10 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#11 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#12 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#13 {main}
+2013-09-26T19:59:25+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-appmoe...')
+#1 C:\xampp\htdocs\default-app\lib\App\View.php(96): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\app\views\index\index.phtml(3): App_View->action('test', 'moep')
+#3 C:\xampp\htdocs\default-app\lib\App\View.php(44): require_once('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\default-app\lib\App\View.php(27): App_View->loadView('index', 'index')
+#5 C:\xampp\htdocs\default-app\app\layout\default.phtml(7): App_View->_getContent()
+#6 C:\xampp\htdocs\default-app\lib\App\View.php(70): require_once('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\default-app\lib\App\Controller.php(102): App_View->loadLayoutView('index', 'index')
+#8 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(119): App_Controller->__loadView()
+#9 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(100): App_Router_Dispatcher->dispatchController('Index', 'indexAction', Array)
+#10 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#11 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#12 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#13 {main}
+2013-09-26T19:59:33+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-appmoe...')
+#1 C:\xampp\htdocs\default-app\lib\App\View.php(96): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\app\views\index\index.phtml(3): App_View->action('test', 'moep')
+#3 C:\xampp\htdocs\default-app\lib\App\View.php(44): require_once('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\default-app\lib\App\View.php(27): App_View->loadView('index', 'index')
+#5 C:\xampp\htdocs\default-app\app\layout\default.phtml(7): App_View->_getContent()
+#6 C:\xampp\htdocs\default-app\lib\App\View.php(70): require_once('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\default-app\lib\App\Controller.php(102): App_View->loadLayoutView('index', 'index')
+#8 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(119): App_Controller->__loadView()
+#9 C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php(100): App_Router_Dispatcher->dispatchController('Index', 'indexAction', Array)
+#10 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#11 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#12 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#13 {main}
+2013-09-26T20:00:31+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/in...')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:00:47+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:00:49+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:01:30+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:01:45+02:00 ERR (3): exception 'Router_ClassMethodNotFoundException' with message 'method not found testAction' in C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php:96
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:01:50+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:01:53+02:00 ERR (3): exception 'Router_ClassFileNotFoundException' with message 'Class file not found' in C:\xampp\htdocs\default-app\lib\App\Router\Dispatcher.php:86
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(128): App_Router_Dispatcher->dispatch(Object(App_Router_Route), Object(App_Request))
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2013-09-26T20:10:57+02:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\default-app\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\default-app\lib\App\Router.php(126): App_Router_Router->findRoute('/default-app/')
+#1 C:\xampp\htdocs\default-app\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\default-app\public\index.php(24): App::run()
+#3 {main}
+2014-01-17T15:40:16+01:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\Skelappton\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\Skelappton\lib\App\Router.php(125): App_Router_Router->findRoute('/Skelappton/')
+#1 C:\xampp\htdocs\Skelappton\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\Skelappton\public\index.php(24): App::run()
+#3 {main}
+2014-01-17T15:40:20+01:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\Skelappton\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\Skelappton\lib\App\Router.php(125): App_Router_Router->findRoute('/skelappton/')
+#1 C:\xampp\htdocs\Skelappton\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\Skelappton\public\index.php(24): App::run()
+#3 {main}
+2014-01-17T15:40:23+01:00 ERR (3): exception 'Router_RouteNotFoundException' in C:\xampp\htdocs\Skelappton\lib\App\Router\Router.php:143
+Stack trace:
+#0 C:\xampp\htdocs\Skelappton\lib\App\Router.php(125): App_Router_Router->findRoute('/skelappton/')
+#1 C:\xampp\htdocs\Skelappton\lib\App.php(253): App_Router->route(Object(App_Request))
+#2 C:\xampp\htdocs\Skelappton\public\index.php(24): App::run()
+#3 {main}
