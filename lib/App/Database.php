@@ -213,9 +213,11 @@ class App_Database
 	public function query()
 	{}
 
-	public function insert()
+	public function insert($data, $table)
 	{
-		// TODO: Insert
+		$query = 'INSERT INTO `' . $table . '`';
+		implode(', ', array_fill(0, count($data), '?'));
+		//$this->_execute();
 
 		return $this->_pdo->lastInsertId();
 	}
