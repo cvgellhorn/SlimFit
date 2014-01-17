@@ -1,7 +1,7 @@
-default-app
+Skelappton
 ===========
 
-A simple mvc based web app framework.
+A simple mvc based web skeleton framework.
 
 Currently there some parts based on the Zend Framework version 1.12 (http://framework.zend.com/) and 
 the php-router by Rob Apodaca (http://robap.github.com/php-router/).
