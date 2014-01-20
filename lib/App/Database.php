@@ -250,19 +250,23 @@ class App_Database
 	public function query()
 	{}
 
-	public function insert($data, $table)
+	public function insert($table, $data)
 	{
-		$query = 'INSERT INTO `' . $table . '` ';
-		$query .= '(' . implode(', ', array_keys($data)) . ') ';
-		$query .= 'VALUES (' . implode(', ', array_fill(0, count($data), '?')) . ')';
+		$keys = array_keys($data);
+		$query = 'INSERT INTO `' . $table . '` '
+				. '(' . implode(', ', $keys) . ') '
+				. 'VALUES (:' . implode(', :', $keys) . ')';
 
-		App_Debug::dump($query);
+		$this->_prepare($query);
+		foreach ($data as $key => &$val) {
+			$this->_stmt->bindParam(':' . $key, $val);
+		}
 
-		//$this->_execute();
-		//return $this->_pdo->lastInsertId();
+		$this->_execute();
+		return $this->_pdo->lastInsertId();
 	}
 
-	public function multiInsert($meta, $values)
+	/*public function multiInsert($meta, $values)
 	{
 		$stmt = array();
 		foreach ($values as $value) {
@@ -274,10 +278,22 @@ class App_Database
 		}
 
 		$statement = implode(', ', $stmt);
-	}
+	}*/
 
-	public function update()
-	{}
+	public function update($table, $data, $where)
+	{
+		$keys = array_keys($data);
+		$query = 'UPDATE `' . $table . '` '
+				. 'SET ' . implode(', ', $keys) . ' '
+				. 'VALUES (:' . implode(', :', $keys) . ')';
+
+		$this->_prepare($query);
+		foreach ($data as $key => &$val) {
+			$this->_stmt->bindParam(':' . $key, $val);
+		}
+
+		$this->_execute();
+	}
 
 	/**
 	 * ON DUPLICATE KEY UPDATE
@@ -287,9 +303,7 @@ class App_Database
 	 * @param null $where
 	 */
 	public function save($data, $table, $where = null)
-	{
-
-	}
+	{}
 
 	public function delete()
 	{}

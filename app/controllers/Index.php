@@ -14,10 +14,10 @@ class Index extends App_Controller
 		$result = $db->fetchAssoc('SELECT * FROM `data` WHERE `test` = \'blub\'', 'sdsdh');
 		App_Debug::dump($result);
 
-		$db->insert(array(
-			'moep' => 'teeest',
-			'blub' => 'sdsdhsdh',
-			'teeeeet' => 'sdhsdsdh'
-		), 'user');
+		App_Debug::dump($db->insert('data', array(
+			'test' => 'chingchang',
+			'moep' => 'ajaijai',
+			'value' => ' eegehrgjehrgj herghegj'
+		)));
 	}
 }
