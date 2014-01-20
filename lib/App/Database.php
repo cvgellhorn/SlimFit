@@ -279,6 +279,18 @@ class App_Database
 	public function update()
 	{}
 
+	/**
+	 * ON DUPLICATE KEY UPDATE
+	 *
+	 * @param $data
+	 * @param $table
+	 * @param null $where
+	 */
+	public function save($data, $table, $where = null)
+	{
+
+	}
+
 	public function delete()
 	{}
 }
