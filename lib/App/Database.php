@@ -15,6 +15,13 @@ class App_Database
 	private static $_instance = null;
 
 	/**
+	 * Collection of active database connections
+	 *
+	 * @var array of App_Database
+	 */
+	private static $_connections = array();
+
+	/**
 	 * PDO Mysql object
 	 *
 	 * @var PDO
@@ -42,19 +49,49 @@ class App_Database
 	}
 
 	/**
+	 * Create and get new database connection
+	 *
+	 * @param string $name Connection name
+	 * @return App_Database
+	 */
+	public static function getConnection($name = null)
+	{
+		if (null === $name) {
+			return new self();
+		} else {
+			if (!isset(self::$_connections[$name])) {
+				self::$_connections[$name] = new self();
+			}
+			return self::$_connections[$name];
+		}
+	}
+
+	/**
 	 * Create DB object and connect to MySQL
 	 */
-	private function __construct()
+	private function __construct($pdoType = 'mysql')
 	{
 		try {
+			if (!extension_loaded('pdo_mysql')) {
+				throw new App_Exception('pdo_mysql extension is not installed');
+			}
+
 			$config = App_Ini::get('db');
+			$dsn = array(
+				'host=' . $config['host'],
+				'dbname=' . $config['database']
+			);
+
 			$this->_pdo = new PDO(
-				'mysql:host=' . $config['host'] . ';dbname=' . $config['database'],
+				$pdoType . ':' . implode(';', $dsn),
 				$config['user'],
 				$config['password']
 			);
+
+			// Always use exceptions
+			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
-			die('Connect Error (' . $e->getMessage() . ') ' . $e->getCode());
+			throw new App_Exception($e->getMessage(), $e->getCode());
 		}
 	}
 
@@ -62,6 +99,7 @@ class App_Database
 	 * Prepare SQL statement for executing
 	 *
 	 * @param string $sql SQL statement
+	 * @return PDOStatement
 	 * @throws App_Exception
 	 */
 	private function _prepare($sql)
@@ -71,19 +109,18 @@ class App_Database
 		if ($this->_stmt === false) {
 			throw new App_Exception('PDO Mysql prepare error: ' . $this->_pdo->error, $this->_pdo->errno);
 		}
+
+		return $this;
 	}
 
 	/**
 	 * Execute SQL statement
 	 *
-	 * @param string $sql SQL statement
 	 * @return PDOStatement
 	 * @throws App_Exception
 	 */
-	private function _execute($sql)
+	private function _execute()
 	{
-		$this->_prepare($sql);
-
 		if (!$this->_stmt) {
 			throw new App_Exception('PDO Mysql statement error: ' . $this->_pdo->error, $this->_pdo->errno);
 		}
@@ -160,7 +197,7 @@ class App_Database
 	 */
 	public function fetchAll($sql)
 	{
-		return $this->_execute($sql)->fetchAll(PDO::FETCH_ASSOC);
+		return $this->_prepare($sql)->_execute()->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	/**
@@ -173,7 +210,7 @@ class App_Database
 	public function fetchAssoc($sql, $key = 'id')
 	{
 		// Raw result data
-		$data = $this->_execute($sql)->fetchAll(PDO::FETCH_ASSOC);
+		$data = $this->_prepare($sql)->_execute()->fetchAll(PDO::FETCH_ASSOC);
 
 		$result = array();
 		if (!empty($data) && isset($data[0][$key])) {
@@ -195,7 +232,7 @@ class App_Database
 	 */
 	public function fetchColumn($sql)
 	{
-		return $this->_execute($sql)->fetch(PDO::FETCH_ASSOC);
+		return $this->_prepare($sql)->_execute()->fetch(PDO::FETCH_ASSOC);
 	}
 
 	/**
@@ -206,7 +243,7 @@ class App_Database
 	 */
 	public function fetchOne($sql)
 	{
-		$result = $this->_execute($sql)->fetch(PDO::FETCH_NUM);
+		$result = $this->_prepare($sql)->_execute()->fetch(PDO::FETCH_NUM);
 		return isset($result[0]) ? $result[0] : null;
 	}
 
