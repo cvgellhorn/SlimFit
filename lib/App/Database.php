@@ -99,15 +99,38 @@ class App_Database
 	 * Prepare SQL statement for executing
 	 *
 	 * @param string $sql SQL statement
-	 * @return PDOStatement
+	 * @return App_Database
 	 * @throws App_Exception
 	 */
 	private function _prepare($sql)
 	{
 		$this->_stmt = $this->_pdo->prepare($sql);
 
-		if ($this->_stmt === false) {
+		if (false === $this->_stmt) {
 			throw new App_Exception('PDO Mysql prepare error: ' . $this->_pdo->error, $this->_pdo->errno);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Bind SQL query params to PDO statement object
+	 *
+	 * @param array $data SQL query params
+	 * @param bool $named Named or positional parameters
+	 * @return App_Database
+	 */
+	private function _bindParams($data, $named = true)
+	{
+		if ($named) {
+			foreach ($data as $key => &$val) {
+				$this->_stmt->bindParam(':' . $key, $val);
+			}
+		} else {
+			$count = count($data);
+			for ($i = 0; $i < $count; $i++) {
+				$this->_stmt->bindParam($i + 1, $data[$i]);
+			}
 		}
 
 		return $this;
@@ -225,12 +248,12 @@ class App_Database
 	}
 
 	/**
-	 * Fetch column by SQL statement
+	 * Fetch row by SQL statement
 	 *
 	 * @param string $sql SQL statement
 	 * @return array SQL result
 	 */
-	public function fetchColumn($sql)
+	public function fetchRow($sql)
 	{
 		return $this->_prepare($sql)->_execute()->fetch(PDO::FETCH_ASSOC);
 	}
@@ -257,12 +280,7 @@ class App_Database
 				. '(' . implode(', ', $keys) . ') '
 				. 'VALUES (:' . implode(', :', $keys) . ')';
 
-		$this->_prepare($query);
-		foreach ($data as $key => &$val) {
-			$this->_stmt->bindParam(':' . $key, $val);
-		}
-
-		$this->_execute();
+		$this->_prepare($query)->_bindParams($data)->_execute();
 		return $this->_pdo->lastInsertId();
 	}
 
@@ -280,19 +298,30 @@ class App_Database
 		$statement = implode(', ', $stmt);
 	}*/
 
-	public function update($table, $data, $where)
+	public function update($table, $data, $where = array())
 	{
-		$keys = array_keys($data);
-		$query = 'UPDATE `' . $table . '` '
-				. 'SET ' . implode(', ', $keys) . ' '
-				. 'VALUES (:' . implode(', :', $keys) . ')';
+		$query = 'UPDATE `' . $table . '` SET ';
 
-		$this->_prepare($query);
-		foreach ($data as $key => &$val) {
-			$this->_stmt->bindParam(':' . $key, $val);
+		$par = array();
+		foreach ($data as $key => $val) {
+			$par[] = '`' . $key . '` = ?';
+		}
+		$query .= implode(', ', $par);
+
+		if (!empty($where)) {
+			$query .= ' WHERE ' . implode(' AND ', array_keys($where));
 		}
 
-		$this->_execute();
+		$params = array_merge(
+			array_values($data),
+			array_values($where)
+		);
+
+		App_Debug::dump($query);
+		App_Debug::dump($params);
+		$this->_prepare($query)->_bindParams($params)->_execute();
+		//App_Debug::dump($this->_stmt->queryString);
+		//$this->_prepare($query)->_bindParams(array_merge($data, $where))->_execute();
 	}
 
 	/**
