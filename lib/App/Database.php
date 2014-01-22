@@ -130,7 +130,11 @@ class App_Database
 	{
 		if ($type === self::BIND_TYPE_NAMED) {
 			foreach ($data as $key => &$val) {
-				$this->_stmt->bindParam(':' . $key, $val);
+				if ($val instanceof App_Db_Expr) {
+					$this->_stmt->bindParam(':' . $key, $val, PDO::PARAM_STMT);
+				} else {
+					$this->_stmt->bindParam(':' . $key, $val);
+				}
 			}
 		} else if ($type === self::BIND_TYPE_NUM) {
 			$count = count($data);
@@ -404,5 +408,20 @@ class App_Database
 	public function drop($table)
 	{
 		$this->_prepare('DROP TABLE ' . $this->btick($table))->_execute();
+	}
+}
+
+class App_Db_Expr
+{
+	public $key;
+
+	public function __construct($key)
+	{
+		$this->key = $key;
+	}
+
+	public function __toString()
+	{
+		return $this->key;
 	}
 }

@@ -22,7 +22,7 @@ class Index extends App_Controller
 
 		/*App_Debug::dump($db->delete('data', array(
 			'test = ?' => 'chingchang',
-			'moep = ?' => 'ajaijai'
+			'moep = ?' => new App_Db_Expr('NOW()')
 		)));*/
 	}
 }
