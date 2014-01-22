@@ -8,6 +8,12 @@
 class App_Database
 {
 	/**
+	 * Parameter bind types
+	 */
+	const BIND_TYPE_NAMED   = 'named';
+	const BIND_TYPE_NUM     = 'num';
+
+	/**
 	 * Instance implementation
 	 *
 	 * @var App_Database
@@ -117,16 +123,16 @@ class App_Database
 	 * Bind SQL query params to PDO statement object
 	 *
 	 * @param array $data SQL query params
-	 * @param bool $named Named or positional parameters
+	 * @param string $type Parameter bind type
 	 * @return App_Database
 	 */
-	private function _bindParams($data, $named = true)
+	private function _bindParams($data, $type = self::BIND_TYPE_NAMED)
 	{
-		if ($named) {
+		if ($type === self::BIND_TYPE_NAMED) {
 			foreach ($data as $key => &$val) {
 				$this->_stmt->bindParam(':' . $key, $val);
 			}
-		} else {
+		} else if ($type === self::BIND_TYPE_NUM) {
 			$count = count($data);
 			for ($i = 0; $i < $count; $i++) {
 				$this->_stmt->bindParam($i + 1, $data[$i]);
@@ -160,6 +166,28 @@ class App_Database
 	public function getPDO()
 	{
 		return $this->_pdo;
+	}
+
+	/**
+	 * Return given value with quotes
+	 *
+	 * @param string $val Value
+	 * @return string Value with quotes
+	 */
+	public function quote($val)
+	{
+		return "'$val'";
+	}
+
+	/**
+	 * Return given value with backticks
+	 *
+	 * @param string $val Value
+	 * @return string Value with backticks
+	 */
+	public function btick($val)
+	{
+		return "`$val`";
 	}
 
 	/**
@@ -273,38 +301,54 @@ class App_Database
 	public function query()
 	{}
 
+	/**
+	 * Insert given data into database
+	 *
+	 * @param strin $table DB table name
+	 * @param array $data Data to insert
+	 * @return int Last insert ID
+	 */
 	public function insert($table, $data)
 	{
 		$keys = array_keys($data);
-		$query = 'INSERT INTO `' . $table . '` '
-				. '(' . implode(', ', $keys) . ') '
-				. 'VALUES (:' . implode(', :', $keys) . ')';
+		$query = 'INSERT INTO ' . $this->btick($table)
+				. ' (' . implode(', ', $keys) . ')'
+				. ' VALUES (:' . implode(', :', $keys) . ')';
 
 		$this->_prepare($query)->_bindParams($data)->_execute();
 		return $this->_pdo->lastInsertId();
 	}
 
-	/*public function multiInsert($meta, $values)
-	{
-		$stmt = array();
-		foreach ($values as $value) {
-			$val = array();
-			foreach ($value as $v) {
-				$val[] = $v;
-			}
-			$stmt[] = '(' . implode(', ', $val) . ')';
-		}
+	/**
+	 * Do a multi insert
+	 *
+	 * TODO: try binding for multiple rows
+	 */
+	public function multiInsert()
+	{}
 
-		$statement = implode(', ', $stmt);
-	}*/
+	/**
+	 * ON DUPLICATE KEY UPDATE
+	 *
+	 * TODO: build on duplicate key update method
+	 */
+	public function save($table, $data)
+	{}
 
+	/**
+	 * Update data by given condition
+	 *
+	 * @param string $table DB table name
+	 * @param array $data Data to update
+	 * @param array $where Update condition
+	 */
 	public function update($table, $data, $where = array())
 	{
-		$query = 'UPDATE `' . $table . '` SET ';
+		$query = 'UPDATE ' . $this->btick($table) . ' SET ';
 
 		$par = array();
 		foreach ($data as $key => $val) {
-			$par[] = '`' . $key . '` = ?';
+			$par[] = $this->btick($key) . ' = ?';
 		}
 		$query .= implode(', ', $par);
 
@@ -317,23 +361,48 @@ class App_Database
 			array_values($where)
 		);
 
-		App_Debug::dump($query);
-		App_Debug::dump($params);
-		$this->_prepare($query)->_bindParams($params)->_execute();
-		//App_Debug::dump($this->_stmt->queryString);
-		//$this->_prepare($query)->_bindParams(array_merge($data, $where))->_execute();
+		$this->_prepare($query)
+			 ->_bindParams($params, self::BIND_TYPE_NUM)
+			 ->_execute();
 	}
 
 	/**
-	 * ON DUPLICATE KEY UPDATE
+	 * Delete from database table
 	 *
-	 * @param $data
-	 * @param $table
-	 * @param null $where
+	 * @param string $table DB table name
+	 * @param array $where Delete condition
 	 */
-	public function save($data, $table, $where = null)
-	{}
+	public function delete($table, $where = array())
+	{
+		$query = 'DELETE FROM ' . $this->btick($table);
+		if (!empty($where)) {
+			$query .= ' WHERE ' . implode(' AND ', array_keys($where));
+		}
 
-	public function delete()
-	{}
+		$this->_prepare($query);
+		if (!empty($where)) {
+			$this->_bindParams(array_values($where), self::BIND_TYPE_NUM);
+		}
+		$this->_execute();
+	}
+
+	/**
+	 * Truncate database table
+	 *
+	 * @param string $table DB table name
+	 */
+	public function truncate($table)
+	{
+		$this->_prepare('TRUNCATE TABLE ' . $this->btick($table))->_execute();
+	}
+
+	/**
+	 * Drop database table
+	 *
+	 * @param string $table DB table name
+	 */
+	public function drop($table)
+	{
+		$this->_prepare('DROP TABLE ' . $this->btick($table))->_execute();
+	}
 }

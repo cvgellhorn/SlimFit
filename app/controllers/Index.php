@@ -15,18 +15,14 @@ class Index extends App_Controller
 		App_Debug::dump($result);
 
 		/*App_Debug::dump($db->insert('data', array(
-			'test' => 'chingchang',
-			'moep' => 'ajaijai',
-			'value' => ' eegehrgjehrgj herghegj'
+			'test' => 'nevermind',
+			'moep' => 'test',
+			'value' => 'eegehrgjehrgj herghegj'
 		)));*/
 
-		App_Debug::dump($db->update('data', array(
-			'test' => 'chingchang',
-			'moep' => 'ajaijai',
-			'value' => ' eegehrgjehrgj herghegj'
-		), array(
-			'moep = ?' => 'teeeeest',
-			'id = ?' => '1'
-		)));
+		/*App_Debug::dump($db->delete('data', array(
+			'test = ?' => 'chingchang',
+			'moep = ?' => 'ajaijai'
+		)));*/
 	}
 }
