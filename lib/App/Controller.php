@@ -48,7 +48,7 @@ class App_Controller
 		$this->request = App_Request::getInstance();
 		$this->view = new App_View();
 
-		//-- Call child constructor
+		// Call child constructor
 		$this->_init();
 	}
 	
@@ -75,7 +75,7 @@ class App_Controller
 	 */
 	public function __doAuth()
 	{
-		//-- Do Auth
+		// Do Auth
 		/*if($this->request->isInternal())
 			return;
 		
