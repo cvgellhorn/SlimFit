@@ -8,12 +8,12 @@
  * Time: 19:08
  * User: cgellhorn
  */
-abstract class App_Database_Abstract
+abstract class App_Db_Abstract
 {
 	protected $_db;
 
 	public function __construct()
 	{
-		$this->_db = App_Database::getInstance();
+		$this->_db = App_Db::getInstance();
 	}
-} 
+}

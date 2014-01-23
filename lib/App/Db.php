@@ -5,18 +5,12 @@
  *
  * @author cvgellhorn
  */
-class App_Database
+class App_Db
 {
-	/**
-	 * Parameter bind types
-	 */
-	const BIND_TYPE_NAMED   = 'named';
-	const BIND_TYPE_NUM     = 'num';
-
 	/**
 	 * Instance implementation
 	 *
-	 * @var App_Database
+	 * @var App_Db
 	 */
 	private static $_instance = null;
 
@@ -44,7 +38,7 @@ class App_Database
 	/**
 	 * Single pattern implementation
 	 *
-	 * @return App_Database
+	 * @return App_Db
 	 */
 	public static function getInstance()
 	{
@@ -58,7 +52,7 @@ class App_Database
 	 * Create and get new database connection
 	 *
 	 * @param string $name Connection name
-	 * @return App_Database
+	 * @return App_Db
 	 */
 	public static function getConnection($name = null)
 	{
@@ -105,7 +99,7 @@ class App_Database
 	 * Prepare SQL statement for executing
 	 *
 	 * @param string $sql SQL statement
-	 * @return App_Database
+	 * @return App_Db
 	 * @throws App_Exception
 	 */
 	private function _prepare($sql)
@@ -123,24 +117,13 @@ class App_Database
 	 * Bind SQL query params to PDO statement object
 	 *
 	 * @param array $data SQL query params
-	 * @param string $type Parameter bind type
-	 * @return App_Database
+	 * @return App_Db
 	 */
-	private function _bindParams($data, $type = self::BIND_TYPE_NAMED)
+	private function _bindParams($data)
 	{
-		if ($type === self::BIND_TYPE_NAMED) {
-			foreach ($data as $key => &$val) {
-				if ($val instanceof App_Db_Expr) {
-					$this->_stmt->bindParam(':' . $key, $val, PDO::PARAM_STMT);
-				} else {
-					$this->_stmt->bindParam(':' . $key, $val);
-				}
-			}
-		} else if ($type === self::BIND_TYPE_NUM) {
-			$count = count($data);
-			for ($i = 0; $i < $count; $i++) {
-				$this->_stmt->bindParam($i + 1, $data[$i]);
-			}
+		$count = count($data);
+		for ($i = 0; $i < $count; $i++) {
+			$this->_stmt->bindParam($i + 1, $data[$i]);
 		}
 
 		return $this;
@@ -302,8 +285,46 @@ class App_Database
 		return isset($result[0]) ? $result[0] : null;
 	}
 
-	public function query()
-	{}
+	/**
+	 * Executes an SQL statement
+	 *
+	 * @param string $sql SQL statement
+	 * @return array|bool|mixed|null SQL result
+	 * @throws App_Exception
+	 */
+	public function query($sql)
+	{
+		try {
+			/**
+			 * @var $result PDOStatement
+			 */
+			$result = $this->_pdo->query($sql);
+		} catch (PDOException $e) {
+			throw new App_Exception('PDO Mysql statement error: ' . $e->getMessage(), $e->getCode());
+		}
+
+		$columnCount = $result->columnCount();
+		$rowCount = $result->rowCount();
+
+		// If statment is as SELECT statement
+		if ($columnCount > 0) {
+			// Equal to fetchOne
+			if ($columnCount === 1 && $rowCount === 1) {
+				$res = $result->fetch(PDO::FETCH_NUM);
+				return isset($res[0]) ? $res[0] : null;
+
+			// Equal to fetchRow
+			} else if ($columnCount > 1 && $rowCount === 1) {
+				return $result->fetch(PDO::FETCH_ASSOC);
+
+			// Equal to fetchAll
+			} else {
+				return $result->fetchAll(PDO::FETCH_ASSOC);
+			}
+		} else {
+			return true;
+		}
+	}
 
 	/**
 	 * Insert given data into database
@@ -314,12 +335,24 @@ class App_Database
 	 */
 	public function insert($table, $data)
 	{
-		$keys = array_keys($data);
+		$keys = array();
+		$values = array();
+
+		foreach ($data as $key => $val) {
+			$keys[] = $this->btick($key);
+			if ($val instanceof App_Db_Expr) {
+				$values[] = $val;
+				unset($data[$key]);
+			} else {
+				$values[] = '?';
+			}
+		}
+
 		$query = 'INSERT INTO ' . $this->btick($table)
 				. ' (' . implode(', ', $keys) . ')'
-				. ' VALUES (:' . implode(', :', $keys) . ')';
+				. ' VALUES (' . implode(', ', $values) . ')';
 
-		$this->_prepare($query)->_bindParams($data)->_execute();
+		$this->_prepare($query)->_bindParams(array_values($data))->_execute();
 		return $this->_pdo->lastInsertId();
 	}
 
@@ -352,7 +385,12 @@ class App_Database
 
 		$par = array();
 		foreach ($data as $key => $val) {
-			$par[] = $this->btick($key) . ' = ?';
+			if ($val instanceof App_Db_Expr) {
+				$par[] = $this->btick($key) . ' = ' . $val;
+				unset($data[$key]);
+			} else {
+				$par[] = $this->btick($key) . ' = ?';
+			}
 		}
 		$query .= implode(', ', $par);
 
@@ -365,9 +403,7 @@ class App_Database
 			array_values($where)
 		);
 
-		$this->_prepare($query)
-			 ->_bindParams($params, self::BIND_TYPE_NUM)
-			 ->_execute();
+		$this->_prepare($query)->_bindParams($params)->_execute();
 	}
 
 	/**
@@ -385,7 +421,7 @@ class App_Database
 
 		$this->_prepare($query);
 		if (!empty($where)) {
-			$this->_bindParams(array_values($where), self::BIND_TYPE_NUM);
+			$this->_bindParams(array_values($where));
 		}
 		$this->_execute();
 	}
@@ -408,20 +444,5 @@ class App_Database
 	public function drop($table)
 	{
 		$this->_prepare('DROP TABLE ' . $this->btick($table))->_execute();
-	}
-}
-
-class App_Db_Expr
-{
-	public $key;
-
-	public function __construct($key)
-	{
-		$this->key = $key;
-	}
-
-	public function __toString()
-	{
-		return $this->key;
 	}
 }
