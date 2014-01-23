@@ -54,7 +54,7 @@ class App_Model_Collection implements Iterator, ArrayAccess
 	 *
 	 * @link http://www.php.net/manual/en/iterator.rewind.php
 	 */
-	function rewind()
+	public function rewind()
 	{
 		return reset($this->_data);
 	}
@@ -64,7 +64,7 @@ class App_Model_Collection implements Iterator, ArrayAccess
 	 *
 	 * @link http://www.php.net/manual/en/iterator.current.php
 	 */
-	function current()
+	public function current()
 	{
 		return current($this->_data);
 	}
@@ -74,7 +74,7 @@ class App_Model_Collection implements Iterator, ArrayAccess
 	 *
 	 * @link http://www.php.net/manual/en/iterator.key.php
 	 */
-	function key()
+	public function key()
 	{
 		return key($this->_data);
 	}
@@ -84,7 +84,7 @@ class App_Model_Collection implements Iterator, ArrayAccess
 	 *
 	 * @link http://www.php.net/manual/en/iterator.next.php
 	 */
-	function next()
+	public function next()
 	{
 		return next($this->_data);
 	}
@@ -94,7 +94,7 @@ class App_Model_Collection implements Iterator, ArrayAccess
 	 *
 	 * @link http://www.php.net/manual/en/iterator.valid.php
 	 */
-	function valid()
+	public function valid()
 	{
 		return key($this->_data) !== null;
 	}
