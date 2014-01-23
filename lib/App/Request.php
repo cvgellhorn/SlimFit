@@ -7,19 +7,29 @@
  */
 class App_Request
 {
-	//-- Instance implementation
+	/**
+	 * Instance implementation
+	 *
+	 * @var App_Request
+	 */
 	private static $_instance = null;
-	
-	//-- Request options
+
+	/**
+	 * Request options
+	 */
 	private $_uri;
 	private $_routerUri;
 	private $_controller;
 	private $_action;
-	
-	//-- Instance parameters
+
+	/**
+	 * @var array Instance parameters
+	 */
 	private $_params = array();
-	
-	//-- Is internal request
+
+	/**
+	 * @var bool Is internal request
+	 */
 	private $_isInternal = false;
 
 	/**
@@ -248,12 +258,12 @@ class App_Request
      */
 	public function getHeader($header)
 	{
-		//-- Try to get it from the $_SERVER array first
+		// Try to get it from the $_SERVER array first
 		$temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
 		if (isset($_SERVER[$temp]))
 			return $_SERVER[$temp];
 
-		//-- Seems to be the only way to get the Authorization header on Apache
+		// Seems to be the only way to get the Authorization header on Apache
 		if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
 			if (isset($headers[$header]))
