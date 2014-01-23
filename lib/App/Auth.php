@@ -66,7 +66,7 @@ class App_Auth
 	 */
 	public function logout()
 	{
-		if($this->hasIdentity()) {
+		if ($this->hasIdentity()) {
 			$this->getAdapter()->logout();
 		}
 	}
@@ -90,7 +90,7 @@ class App_Auth
 	 */
 	public function setIdentity(App_Auth_Identity $identity)
 	{
-		if($this->hasIdentity()) {
+		if ($this->hasIdentity()) {
 			throw new App_Exception('Can\'t set identity of already authenticated user');
 		}
 		
@@ -126,7 +126,7 @@ class App_Auth
 	{
 		if (null === $this->_authAdapter) {
 			$adapter = App_Ini::get('auth')['adapter'];
-			switch($adapter) {
+			switch ($adapter) {
 				case 'db':
 					$adapterClass = new App_Auth_Db();
 					break;
