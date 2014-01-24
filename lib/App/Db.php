@@ -141,7 +141,12 @@ class App_Db
 			throw new App_Exception('PDO Mysql statement error: ' . $this->_pdo->error, $this->_pdo->errno);
 		}
 
-		$this->_stmt->execute();
+		try {
+			$this->_stmt->execute();
+		} catch (PDOException $e) {
+			throw new App_Exception('PDO Mysql execution error: ' . $e->getMessage(), $e->getCode());
+		}
+
 		return $this->_stmt;
 	}
 
