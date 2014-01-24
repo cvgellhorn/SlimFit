@@ -117,7 +117,7 @@ final class App
 	 */
 	public static function getClass($class, $type, $data = null, $instance = false)
 	{
-		//-- Example: App/Router/Dispatcher.php
+		// Example: App/Router/Dispatcher.php
 		$file = str_replace('_', DS, $class) . '.php';
 		
 		switch($type) {
