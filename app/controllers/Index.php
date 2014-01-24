@@ -20,7 +20,7 @@ class Index extends App_Controller
 			'value' => new App_Db_Expr('NOW()')
 		)));*/
 
-		App_Debug::dump($db->query("INSERT INTO `data` (moep, test, value) VALUES ('blub', 'qwerty', 'h eheh erh erher')"));
+		/*App_Debug::dump($db->query("INSERT INTO `data` (moep, test, value) VALUES ('blub', 'qwerty', 'h eheh erh erher')"));
 		//App_Debug::dump($db->query("UPDATE `data` SET moep = 'teeeer', `value` = 'dfsdfsdgs' WHERE moep = 'check' AND `value` = 'blaaaaa'"));
 		App_Debug::dump($db->query("SELECT moep FROM data WHERE moep = 'teeeer'"));
 		App_Debug::dump('-------------------------------------');
@@ -28,7 +28,9 @@ class Index extends App_Controller
 		App_Debug::dump('-------------------------------------');
 		App_Debug::dump($db->query("SELECT * FROM data"));
 		App_Debug::dump('-------------------------------------');
-		App_Debug::dump($db->query("SELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));
+		App_Debug::dump($db->query("SELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));*/
+
+		App_Debug::dump($db->fetchAll("SEELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));
 
 		/*App_Debug::dump($db->delete('data', array(
 			'test = ?' => 'chingchang',

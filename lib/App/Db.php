@@ -26,14 +26,14 @@ class App_Db
 	 *
 	 * @var PDO
 	 */
-	private $_pdo = null;
+	private $_pdo;
 
 	/**
 	 * The driver level statement PDO
 	 *
 	 * @var PDOStatement
 	 */
-	protected $_stmt = null;
+	protected $_stmt;
 
 	/**
 	 * Single pattern implementation
@@ -105,11 +105,6 @@ class App_Db
 	private function _prepare($sql)
 	{
 		$this->_stmt = $this->_pdo->prepare($sql);
-
-		if (false === $this->_stmt) {
-			throw new App_Exception('PDO Mysql prepare error: ' . $this->_pdo->error, $this->_pdo->errno);
-		}
-
 		return $this;
 	}
 
@@ -137,10 +132,6 @@ class App_Db
 	 */
 	private function _execute()
 	{
-		if (!$this->_stmt) {
-			throw new App_Exception('PDO Mysql statement error: ' . $this->_pdo->error, $this->_pdo->errno);
-		}
-
 		try {
 			$this->_stmt->execute();
 		} catch (PDOException $e) {
