@@ -5,14 +5,14 @@
  *
  * @author cvgellhorn
  */
-class Index extends App_Controller
+class Index extends SF_Controller
 {
 	public function indexAction()
 	{
 		//$this->redirect('moep/index');
-		$db = App_Db::getInstance();
+		$db = SF_Db::getInstance();
 		$result = $db->fetchAssoc('SELECT * FROM `data` WHERE `test` = \'blub\'', 'sdsdh');
-		App_Debug::dump($result);
+		SF_Debug::dump($result);
 
 		/*App_Debug::dump($db->insert('data', array(
 			'test' => 'nevermind',
@@ -30,7 +30,7 @@ class Index extends App_Controller
 		App_Debug::dump('-------------------------------------');
 		App_Debug::dump($db->query("SELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));*/
 
-		App_Debug::dump($db->fetchAll("SEELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));
+		SF_Debug::dump($db->fetchAll("SEELECT * FROM data WHERE moep = 'sdhgfsdhgjksdhgjsdhjksghjk'"));
 
 		/*App_Debug::dump($db->delete('data', array(
 			'test = ?' => 'chingchang',

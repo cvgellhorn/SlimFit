@@ -5,21 +5,21 @@
  *
  * @author cvgellhorn
  */
-class Moep extends App_Controller
+class Moep extends SF_Controller
 {	
 	public function indexAction($test)
 	{
-		App_Debug::dump($this->request->getParam('id'));
+		SF_Debug::dump($this->request->getParam('id'));
 		
-		App_Debug::dump($test);
-		App_Debug::dump('INDEX ACTION');
+		SF_Debug::dump($test);
+		SF_Debug::dump('INDEX ACTION');
 	}
 	
 	public function testAction($args)
 	{
 		$this->view->teeeeestValue = '999999999999999';
 		
-		$adapter = App_Auth::getInstance()->getAdapter();
+		$adapter = SF_Auth::getInstance()->getAdapter();
 		$adapter->setLoginData(array(
 			'username'	=> 'test',
 			'password'	=> 'dhdhdhh4df4fdj24'

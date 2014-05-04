@@ -5,12 +5,12 @@
  *
  * @author cvgellhorn
  */
-class App_Db
+class SF_Db
 {
 	/**
 	 * Instance implementation
 	 *
-	 * @var App_Db
+	 * @var SF_Db
 	 */
 	private static $_instance = null;
 
@@ -38,7 +38,7 @@ class App_Db
 	/**
 	 * Single pattern implementation
 	 *
-	 * @return App_Db
+	 * @return SF_Db
 	 */
 	public static function getInstance()
 	{
@@ -52,7 +52,7 @@ class App_Db
 	 * Create and get new database connection
 	 *
 	 * @param string $name Connection name
-	 * @return App_Db
+	 * @return SF_Db
 	 */
 	public static function getConnection($name = null)
 	{
@@ -73,10 +73,10 @@ class App_Db
 	{
 		try {
 			if (!extension_loaded('pdo_mysql')) {
-				throw new App_Exception('pdo_mysql extension is not installed');
+				throw new SF_Exception('pdo_mysql extension is not installed');
 			}
 
-			$config = App_Ini::get('db');
+			$config = SF_Ini::get('db');
 			$dsn = array(
 				'host=' . $config['host'],
 				'dbname=' . $config['database']
@@ -91,7 +91,7 @@ class App_Db
 			// Always use exceptions
 			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
-			throw new App_Exception($e->getMessage(), $e->getCode());
+			throw new SF_Exception($e->getMessage(), $e->getCode());
 		}
 	}
 
@@ -99,8 +99,8 @@ class App_Db
 	 * Prepare SQL statement for executing
 	 *
 	 * @param string $sql SQL statement
-	 * @return App_Db
-	 * @throws App_Exception
+	 * @return SF_Db
+	 * @throws SF_Exception
 	 */
 	private function _prepare($sql)
 	{
@@ -112,7 +112,7 @@ class App_Db
 	 * Bind SQL query params to PDO statement object
 	 *
 	 * @param array $data SQL query params
-	 * @return App_Db
+	 * @return SF_Db
 	 */
 	private function _bindParams($data)
 	{
@@ -128,14 +128,14 @@ class App_Db
 	 * Execute SQL statement
 	 *
 	 * @return PDOStatement
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	private function _execute()
 	{
 		try {
 			$this->_stmt->execute();
 		} catch (PDOException $e) {
-			throw new App_Exception('PDO Mysql execution error: ' . $e->getMessage(), $e->getCode());
+			throw new SF_Exception('PDO Mysql execution error: ' . $e->getMessage(), $e->getCode());
 		}
 
 		return $this->_stmt;
@@ -286,7 +286,7 @@ class App_Db
 	 *
 	 * @param string $sql SQL statement
 	 * @return array|bool|mixed|null SQL result
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public function query($sql)
 	{
@@ -296,7 +296,7 @@ class App_Db
 			 */
 			$result = $this->_pdo->query($sql);
 		} catch (PDOException $e) {
-			throw new App_Exception('PDO Mysql statement error: ' . $e->getMessage(), $e->getCode());
+			throw new SF_Exception('PDO Mysql statement error: ' . $e->getMessage(), $e->getCode());
 		}
 
 		$columnCount = $result->columnCount();
@@ -336,7 +336,7 @@ class App_Db
 
 		foreach ($data as $key => $val) {
 			$keys[] = $this->btick($key);
-			if ($val instanceof App_Db_Expr) {
+			if ($val instanceof SF_Db_Expr) {
 				$values[] = $val;
 				unset($data[$key]);
 			} else {
@@ -381,7 +381,7 @@ class App_Db
 
 		$par = array();
 		foreach ($data as $key => $val) {
-			if ($val instanceof App_Db_Expr) {
+			if ($val instanceof SF_Db_Expr) {
 				$par[] = $this->btick($key) . ' = ' . $val;
 				unset($data[$key]);
 			} else {

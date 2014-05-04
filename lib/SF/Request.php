@@ -5,12 +5,12 @@
  * 
  * @author cvgellhorn
  */
-class App_Request
+class SF_Request
 {
 	/**
 	 * Instance implementation
 	 *
-	 * @var App_Request
+	 * @var SF_Request
 	 */
 	private static $_instance = null;
 
@@ -35,7 +35,7 @@ class App_Request
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return App_Request
+	 * @return SF_Request
 	 */
 	public static function getInstance()
 	{
@@ -72,7 +72,7 @@ class App_Request
 	 * Set new request uri
 	 * 
 	 * @param string $uri New request uri
-	 * @return self
+	 * @return SF_Request
 	 */
 	public function setUri($uri)
 	{
@@ -104,7 +104,7 @@ class App_Request
 	 * Set the current controller name
 	 * 
 	 * @param string $controller Controller name
-	 * @return App_Request
+	 * @return SF_Request
 	 */
 	public function setControllerName($controller)
 	{
@@ -126,7 +126,7 @@ class App_Request
 	 * Set the current action
 	 * 
 	 * @param string $name Action name
-	 * @return App_Request
+	 * @return SF_Request
 	 */
 	public function setActionName($name)
 	{
@@ -141,7 +141,7 @@ class App_Request
      *
      * @param string $key
      * @param mixed $val
-     * @return App_Request
+     * @return SF_Request
      */
 	public function setParam($key, $val)
 	{
@@ -189,7 +189,7 @@ class App_Request
 	/**
      * Unset all user parameters
      *
-     * @return App_Request
+     * @return SF_Request
      */
     public function clearParams()
     {

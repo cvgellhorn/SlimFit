@@ -5,7 +5,7 @@
  *
  * @author cvgellhorn
  */
-class App_Data extends App_Model
+class SF_Data extends SF_Model
 {
 	/**
 	 * Used method for serialize data to json

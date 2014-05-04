@@ -5,7 +5,7 @@
  * 
  * @author cvgellhorn
  */
-class App_Exception extends Exception
+class SF_Exception extends Exception
 {
 	/**
 	 * Constructor of exceptions class
@@ -17,7 +17,7 @@ class App_Exception extends Exception
 	{
 		parent::__construct($message, $code);
 
-		$logger = App::getLogger(App::LOG_FILE_ERROR);
+		$logger = SF::getLogger(SF::LOG_FILE_ERROR);
 		$logger->log($this, Zend_Log::ERR);
 	}
 

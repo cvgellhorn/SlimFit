@@ -1,11 +1,11 @@
 <?php
 
 /**
- * App file manager
+ * SF file manager
  *
  * @author cvgellhorn
  */
-class App_File
+class SF_File
 {
 	/**
 	 * @var Allowed file suffixes
@@ -93,7 +93,7 @@ class App_File
 	 * 
 	 * @param String $fileData Temp file name
 	 * @param String $path New file path
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public static function upload($fileData, $path)
 	{
@@ -107,12 +107,12 @@ class App_File
 			if(self::isAllowed($fileName)) {
 				move_uploaded_file($tempFile, $filepath);
 				//unlink($oldImagePath);
-				App::log('File: '.$filepath.' successfully uploaded', Zend_Log::INFO);
+				SF::log('File: '.$filepath.' successfully uploaded', Zend_Log::INFO);
 			} else {
-				throw new App_Exception('File format/extension not valid', 5007);
+				throw new SF_Exception('File format/extension not valid', 5007);
 			}
 		} catch (Exception $e) {
-			throw new App_Exception($e, 5005);
+			throw new SF_Exception($e, 5005);
 		}
 	}
 	
@@ -121,7 +121,7 @@ class App_File
 	 *
 	 * @param String $file Path with filename
 	 * @param bool $allSuffixes Delete all suffixes?
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public static function delete($file, $allSuffixes = false)
 	{
@@ -135,13 +135,13 @@ class App_File
 				}
 
 				array_map('unlink', glob($mask));
-				App::log('File with all suffixes: ' . $file . ' successfully deleted', Zend_Log::INFO);
+				SF::log('File with all suffixes: ' . $file . ' successfully deleted', Zend_Log::INFO);
 			} else {
 				unlink($file);
-				App::log('File: ' . $file . ' successfully deleted', Zend_Log::INFO);
+				SF::log('File: ' . $file . ' successfully deleted', Zend_Log::INFO);
 			}
 		} catch (Exception $e) {
-			throw new App_Exception($e, 5006);
+			throw new SF_Exception($e, 5006);
 		}
 	}
 	
@@ -170,12 +170,12 @@ class App_File
 	 *
 	 * @param string $fileName Filename
 	 * @param bool $newFile Create new file?
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public function __construct($fileName = 'default.txt', $newFile = false)
 	{
 		if(self::isAllowed($fileName)) {
-			$fileDir = App::getBaseDir('data' . DS . 'files');
+			$fileDir = SF::getBaseDir('data' . DS . 'files');
 			self::createDirIfNotExists($fileDir);
 			
 			$file = $fileDir . DS . $fileName;
@@ -196,7 +196,7 @@ class App_File
 			}
 			$this->_file = $file;
 		} else {
-			throw new App_Exception('File format/extension not valid', 5007);
+			throw new SF_Exception('File format/extension not valid', 5007);
 		}
 	}
 	

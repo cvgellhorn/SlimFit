@@ -1,11 +1,11 @@
 <?php
 
 /**
- * App Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
+ * SF Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
  * 
  * @author cvgellhorn
  */
-class App_Debug
+class SF_Debug
 {
 	/**
      * @var string
@@ -93,7 +93,7 @@ class App_Debug
 	 */
 	public static function fire($var)
 	{
-		$logger = App::getLogger(App::LOG_FILE_DEBUG, true);
+		$logger = SF::getLogger(SF::LOG_FILE_DEBUG, true);
 		$logger->log($var, Zend_Log::DEBUG);
 	}
 }

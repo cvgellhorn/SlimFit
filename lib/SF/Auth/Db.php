@@ -5,7 +5,7 @@
  *
  * @author cvgellhorn
  */
-class App_Auth_Db
+class SF_Auth_Db
 {
 	/**
 	 * Database Connection
@@ -30,7 +30,7 @@ class App_Auth_Db
 
 	public function __construct()
 	{
-		$this->_tableName = App_Ini::get('auth_adapter');
+		$this->_tableName = SF_Ini::get('auth_adapter');
 	}
 
 	/**
@@ -51,14 +51,14 @@ class App_Auth_Db
 	public function login()
 	{
 		if(empty($this->_credentials)) {
-			throw new App_Exception('The user credentials must be supplied.');
+			throw new SF_Exception('The user credentials must be supplied.');
 		}
 		
 		try {
 			//-- TODO: perform a databse authentication with given params
-			App_Auth::getInstance()->setIdentity(new App_Auth_Identity($userData));
+			SF_Auth::getInstance()->setIdentity(new SF_Auth_Identity($userData));
 		} catch(Exception $e) {
-			throw new App_Exception('Failed authenticating user.');
+			throw new SF_Exception('Failed authenticating user.');
 		}
 	}
 
@@ -68,6 +68,6 @@ class App_Auth_Db
 	public function logout()
 	{
 		//-- TODO: Destroy session and session storage data
-		App_Auth::getInstance()->clearIdentity();
+		SF_Auth::getInstance()->clearIdentity();
 	}
 }

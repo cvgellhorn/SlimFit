@@ -1,10 +1,10 @@
 <?php
 
-//-- Live Settings
+// Live Settings
 return array(
 	'app_path'		=> APP_PATH,
 	'auth'			=> false,
-	'base_path'		=> '/skelappton/',	// No base path == /
+	'base_path'		=> '/slimfit/',	// No base path == /
 	'template'		=> 'default',
 	'db'            => array(
 		'host'      => 'localhost',

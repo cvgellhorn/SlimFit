@@ -5,9 +5,9 @@
  *
  * @author cvgellhorn
  */
-class App_Response
+class SF_Response
 {
-	//-- Instance implementation
+	// Instance implementation
 	private static $_instance = null;
 	
 	/**
@@ -25,7 +25,7 @@ class App_Response
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return Instance of App_Request
+	 * @return Instance of SF_Request
 	 */
 	public static function getInstance()
 	{
@@ -53,7 +53,7 @@ class App_Response
 	 * @param string $name Header name
 	 * @param string $val Header value
 	 * @param bool $replace Replace another already header
-	 * @return App_Response
+	 * @return SF_Response
 	 */
 	public function setHeader($name, $val, $replace = false)
 	{
@@ -78,13 +78,13 @@ class App_Response
 	 * Set http response code
 	 * 
 	 * @param int $code Response code
-	 * @return App_Response
-	 * @throws App_Exception
+	 * @return SF_Response
+	 * @throws SF_Exception
 	 */
 	public function setHttpResponseCode($code)
 	{
 		if (!is_int($code) || (100 > $code) || (599 < $code)) {
-            throw new App_Exception('Invalid HTTP response code');
+            throw new SF_Exception('Invalid HTTP response code');
         }
 
         if ((300 <= $code) && (307 >= $code)) {
@@ -100,7 +100,7 @@ class App_Response
 	/**
 	 * Send headers
 	 * 
-	 * @return App_Response
+	 * @return SF_Response
 	 */
 	public function sendHeaders()
 	{
@@ -135,7 +135,7 @@ class App_Response
 	 * 
 	 * @param string $uri Uri to redirect
 	 * @param int $code Response code
-	 * @return App_Response
+	 * @return SF_Response
 	 */
 	public function redirect($uri, $code = 302)
 	{

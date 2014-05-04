@@ -17,8 +17,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-// Include main app class
-require_once 'App.php';
+// Include main SlimFit class
+require_once 'SF.php';
 
-// Run Application
-App::run();
+// Run SlimFit application
+SF::run();

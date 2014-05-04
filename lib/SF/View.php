@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Main App View
+ * Main SF View
  *
  * @author cvgellhorn
  */
-class App_View
+class SF_View
 {
 	/**
 	 * @var Controller and action for dynamic layout loading
@@ -32,7 +32,7 @@ class App_View
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public function loadView($action, $controller)
 	{
@@ -43,10 +43,10 @@ class App_View
 			if (file_exists($viewPath)) {
 				require_once $viewPath;
 			} else {
-				throw new App_Exception('File does not exists' . $action . '.phtml', 3334);
+				throw new SF_Exception('File does not exists' . $action . '.phtml', 3334);
 			}
-		} catch (App_Exception $e) {
-			throw new App_Exception('Could not load view from action: ' . $action, 3333);
+		} catch (SF_Exception $e) {
+			throw new SF_Exception('Could not load view from action: ' . $action, 3333);
 		}
 	}
 	
@@ -55,7 +55,7 @@ class App_View
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
-	 * @throws App_Exception If main template not exists
+	 * @throws SF_Exception If main template not exists
 	 */
 	public function loadLayoutView($action, $controller)
 	{
@@ -64,13 +64,13 @@ class App_View
 		$this->_layoutController = $controller;
 		
 		$layoutPath = APP_PATH . DS .  'layout' . DS 
-			. App_Ini::get('template') . '.phtml';
+			. SF_Ini::get('template') . '.phtml';
 
 		if (file_exists($layoutPath)) {
 			require_once $layoutPath;
 		} else {
-			throw new App_Exception('Layout template does not exists: ' 
-				. App_Ini::get('template') . '.phtml', 3334);
+			throw new SF_Exception('Layout template does not exists: '
+				. SF_Ini::get('template') . '.phtml', 3334);
 		}
 	}
 	
@@ -84,15 +84,15 @@ class App_View
 	public function action($action, $controller, $params = array())
 	{
 		//-- Add given params into request
-		$request = App_Request::getInstance();
+		$request = SF_Request::getInstance();
 		foreach ($params as $key => $value) {
 			$request->setParam($key, $value);
 		}
 		
 		//-- Route to new controller action
 		$request->setIsInternal();
-		App_Router::getInstance()->route($request->setUri(
-			App_Ini::get('base_path') . $controller . '/' . $action
+		SF_Router::getInstance()->route($request->setUri(
+			SF_Ini::get('base_path') . $controller . '/' . $action
 		));
 	}
 }

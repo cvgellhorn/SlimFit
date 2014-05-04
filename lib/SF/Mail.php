@@ -5,7 +5,7 @@
  * 
  * @author cvgellhorn
  */
-class App_Mail
+class SF_Mail
 {
 	
 }

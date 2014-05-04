@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Main App Controller
+ * Main SF Controller
  *
  * @author cvgellhorn
  */
-class App_Controller
+class SF_Controller
 {
 	/**
 	 * @const Global controller defaults
@@ -31,12 +31,12 @@ class App_Controller
 	private $_useView;
 	
 	/**
-	 * @var App_Request
+	 * @var SF_Request
 	 */
 	protected $request;
 	
 	/**
-	 * @var App_View
+	 * @var SF_View
 	 */
 	protected $view;
 	
@@ -45,8 +45,8 @@ class App_Controller
 	 */
 	public function __construct()
 	{
-		$this->request = App_Request::getInstance();
-		$this->view = new App_View();
+		$this->request = SF_Request::getInstance();
+		$this->view = new SF_View();
 
 		// Call child constructor
 		$this->_init();
@@ -71,7 +71,7 @@ class App_Controller
 	{}
 	
 	/**
-	 * Do App authentication
+	 * Do SF authentication
 	 */
 	public function __doAuth()
 	{
@@ -81,7 +81,7 @@ class App_Controller
 		
 		if (App_Ini::get('auth')) {
 			//-- Do auth
-			require_once 'App/Auth.php';
+			require_once 'SF/Auth.php';
 			$auth = App_Auth::getInstance();
 		}*/
 	}
@@ -138,6 +138,6 @@ class App_Controller
 	 */
 	protected function redirect($uri)
 	{
-		App_Response::getInstance()->redirect($uri);
+		SF_Response::getInstance()->redirect($uri);
 	}
 }

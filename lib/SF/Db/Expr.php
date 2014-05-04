@@ -3,7 +3,7 @@
 /**
  * Database Expression
  */
-class App_Db_Expr
+class SF_Db_Expr
 {
 	/**
 	 * @var string Database expression

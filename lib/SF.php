@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Main App class
+ * Main SlimFit class
  * 
  * @author cvgellhorn
  */
-final class App
+final class SF
 {
 	/**
 	 * Application log files
@@ -39,7 +39,7 @@ final class App
      * Get SlimFit version
      * 
      * @param bool $implode
-     * @return string App lib version number
+     * @return string SF lib version number
      */
     public static function getVersion($implode)
     {
@@ -113,11 +113,11 @@ final class App
 	 * @param mixed $data Object data
 	 * @param bool $instance Get singleton or object
 	 * @return mixed Object of given name
-	 * @throws App_Exception
+	 * @throws SF_Exception
 	 */
 	public static function getClass($class, $type, $data = null, $instance = false)
 	{
-		// Example: App/Router/Dispatcher.php
+		// Example: SF/Router/Dispatcher.php
 		$file = str_replace('_', DS, $class) . '.php';
 		
 		switch($type) {
@@ -148,10 +148,10 @@ final class App
 					return new $class();
 				}
 			} catch (Exception $e) {
-				throw new App_Exception('Required class could not be loaded', 9998);
+				throw new SF_Exception('Required class could not be loaded', 9998);
 			}
 		} else {
-			throw new App_Exception('Required class does not exists', 9999);
+			throw new SF_Exception('Required class does not exists', 9999);
 		}
 	}
 	
@@ -246,10 +246,10 @@ final class App
 	 */
 	public static function run()
 	{
-		require_once 'App/Autoloader.php';
-		App_Autoloader::register();
+		require_once 'SF/Autoloader.php';
+		SF_Autoloader::register();
 
-		App_Ini::set(require APP_PATH . '/config/application.config.php');
-		App_Router::getInstance()->route(App_Request::getInstance());
+		SF_Ini::set(require APP_PATH . '/config/application.config.php');
+		SF_Router::getInstance()->route(SF_Request::getInstance());
 	}
 }
