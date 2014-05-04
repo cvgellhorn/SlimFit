@@ -36,7 +36,7 @@ final class App
     private static $_translations = array();
     
 	/**
-     * Private array of instances
+     * Get SlimFit version
      * 
      * @param bool $implode
      * @return string App lib version number
