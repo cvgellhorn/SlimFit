@@ -1,39 +1,49 @@
-<?php
+<?php namespace SF;
 
 /**
  * Autoloader
  *
  * @author cvgellhorn
  */
-class SF_Autoloader
+class Autoloader
 {
 	/**
 	 * Instance exists state
 	 * 
 	 * @var bool
 	 */
-	private static $_instance = false;
+	private static $_registered = false;
 	
 	/**
 	 * Single pattern implementation
-	 * 
-	 * @return Instance of App_Request
 	 */
 	public static function register()
 	{
-		if (false === self::$_instance) {
-			spl_autoload_register(array('self', 'loader'));
-			self::$_instance = true;
+		if (!self::$_registered) {
+			self::$_registered = spl_autoload_register(array('self', 'load'));
 		}
 	}
-	
+
 	/**
-	 * Autoloader method
+	 * Get the normal file path for a class
+	 *
+	 * @param string $class
+	 * @return string Full file path
+	 */
+	public static function normalizeClass($class)
+	{
+		if ($class[0] == '\\') $class = substr($class, 1);
+
+		return str_replace(array('\\', '_'), DS, $class) . '.php';
+	}
+
+	/**
+	 * Load the given class file
 	 * 
 	 * @param string $class Class name
 	 */
-	private static function loader($class)
+	public static function load($class)
 	{
-		require_once str_replace('_', DS, $class) . '.php';
+		require_once(self::normalizeClass($class));
 	}
 }
