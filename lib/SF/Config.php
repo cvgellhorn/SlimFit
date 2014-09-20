@@ -24,7 +24,7 @@ class Config
 		$configFile = APP_DIR . DS . 'config' . DS . self::FILENAME;
 		self::$_data = require_once($configFile);
 
-		// Set global class alias for faster config access
+		// Global alias for faster access
 		class_alias('\SF\Config', 'Config');
 	}
 
