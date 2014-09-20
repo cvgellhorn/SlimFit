@@ -8,14 +8,14 @@
 class Autoloader
 {
 	/**
-	 * Instance exists state
+	 * Indicates if the autoloader has been registered
 	 * 
 	 * @var bool
 	 */
 	private static $_registered = false;
 	
 	/**
-	 * Single pattern implementation
+	 * Register the autoloader
 	 */
 	public static function register()
 	{
