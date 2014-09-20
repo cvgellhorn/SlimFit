@@ -32,6 +32,7 @@ class Autoloader
 	 */
 	public static function normalizeClass($class)
 	{
+		// Trim unnecessary backslash
 		if ($class[0] == '\\') $class = substr($class, 1);
 
 		return str_replace(array('\\', '_'), DS, $class) . '.php';
