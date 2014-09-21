@@ -1,11 +1,11 @@
-<?php
+<?php namespace SlimFit;
 
 /**
  * SlimFit Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
  * 
  * @author cvgellhorn
  */
-class SF_Debug
+class Debug
 {
 	/**
      * @var string
@@ -23,6 +23,7 @@ class SF_Debug
         if (self::$_sapi === null) {
             self::$_sapi = PHP_SAPI;
         }
+
         return self::$_sapi;
     }
 
@@ -50,15 +51,15 @@ class SF_Debug
      */
     public static function dump($var, $label = null, $echo = true)
     {
-        //-- Format the label
+        // Format the label
         $label = ($label === null) ? '' : rtrim($label) . ' ';
 
-        //-- var_dump the variable into a buffer and keep the output
+        // var_dump the variable into a buffer and keep the output
         ob_start();
         var_dump($var);
         $output = ob_get_clean();
 
-        //-- Neaten the newlines and indents
+        // Neaten the newlines and indents
         $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
         if (self::getSapi() == 'cli') {
             $output = PHP_EOL . $label
@@ -67,7 +68,7 @@ class SF_Debug
         } else {
             if(!extension_loaded('xdebug')) {
                 $flags = ENT_QUOTES;
-                //-- PHP 5.4.0+
+                // PHP 5.4.0+
                 if (defined('ENT_SUBSTITUTE')) {
                     $flags = ENT_QUOTES | ENT_SUBSTITUTE;
                 }
@@ -85,15 +86,4 @@ class SF_Debug
         }
         return $output;
     }
-	
-	/**
-	 * Global dump method, uses Zend_Log_Writer_Firebug
-	 *
-	 * @param mixed $var Param to debug
-	 */
-	public static function fire($var)
-	{
-		$logger = SF::getLogger(SF::LOG_FILE_DEBUG, true);
-		$logger->log($var, Zend_Log::DEBUG);
-	}
 }
