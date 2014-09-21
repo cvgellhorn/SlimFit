@@ -18,8 +18,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 // Register autoloader
-require_once('SF/Autoloader.php');
-\SF\Autoloader::register();
+require_once('SlimFit/Autoloader.php');
+\SlimFit\Autoloader::register();
 
 // Run SlimFit application
 SF::run();
