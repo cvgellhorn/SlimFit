@@ -55,12 +55,6 @@ class Request
 	}
 	
 	/**
-	 * Private clone cause single pattern implementation
-	 */
-	private function __clone()
-	{}
-	
-	/**
 	 * Get the current requested uri
 	 * 
 	 * @return String Requested uri
@@ -224,7 +218,7 @@ class Request
      * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      */
-	public function getGet($key = null, $default = null)
+	public function GET($key = null, $default = null)
 	{
 		if (null === $key) return $_GET;
 
@@ -240,7 +234,7 @@ class Request
      * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      */
-	public function getPost($key = null, $default = null)
+	public function POST($key = null, $default = null)
 	{
 		if (null === $key) return $_POST;
 
@@ -290,7 +284,7 @@ class Request
 	 *
 	 * @return boolean
 	 */
-	public function isPost()
+	public function isPOST()
 	{
 		return ('POST' == $this->getMethod()) ? true : false;
 	}
@@ -300,7 +294,7 @@ class Request
 	 *
 	 * @return boolean
 	 */
-	public function isGet()
+	public function isGET()
 	{
 		return ('GET' == $this->getMethod()) ? true : false;
 	}
