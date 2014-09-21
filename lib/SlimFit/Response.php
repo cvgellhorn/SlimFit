@@ -1,13 +1,17 @@
-<?php
+<?php namespace SlimFit;
+
+use SlimFit\Error;
 
 /**
  * Response
  *
  * @author cvgellhorn
  */
-class SF_Response
+class Response
 {
-	// Instance implementation
+	/**
+	 * @var Response Instance implementation
+	 */
 	private static $_instance = null;
 	
 	/**
@@ -25,13 +29,14 @@ class SF_Response
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return Instance of SF_Request
+	 * @return Response
 	 */
-	public static function getInstance()
+	public static function load()
 	{
-		if (null === self::$_instance)
+		if (null === self::$_instance) {
 			self::$_instance = new self();
-		
+		}
+
 		return self::$_instance;
 	}
 	
@@ -42,18 +47,12 @@ class SF_Response
 	{}
 	
 	/**
-	 * Private clone cause single pattern implementation
-	 */
-	private function __clone()
-	{}
-	
-	/**
 	 * Set header
 	 * 
 	 * @param string $name Header name
 	 * @param string $val Header value
 	 * @param bool $replace Replace another already header
-	 * @return SF_Response
+	 * @return Response
 	 */
 	public function setHeader($name, $val, $replace = false)
 	{
@@ -78,13 +77,13 @@ class SF_Response
 	 * Set http response code
 	 * 
 	 * @param int $code Response code
-	 * @return SF_Response
-	 * @throws SF_Exception
+	 * @return Response
+	 * @throws Error
 	 */
 	public function setHttpResponseCode($code)
 	{
 		if (!is_int($code) || (100 > $code) || (599 < $code)) {
-            throw new SF_Exception('Invalid HTTP response code');
+            throw new Error('Invalid HTTP response code');
         }
 
         if ((300 <= $code) && (307 >= $code)) {
@@ -100,15 +99,15 @@ class SF_Response
 	/**
 	 * Send headers
 	 * 
-	 * @return SF_Response
+	 * @return Response
 	 */
 	public function sendHeaders()
 	{
-		//-- Only check if we can send headers if we have headers to send
+		// Only check if we can send headers if we have headers to send
         if (count($this->_headers) || (200 != $this->_httpResponseCode)) {
             //$this->canSendHeaders(true);
         } elseif (200 == $this->_httpResponseCode) {
-            //-- Haven't changed the response code, and we have no headers
+            // Haven't changed the response code, and we have no headers
             return $this;
         }
 		
@@ -135,7 +134,7 @@ class SF_Response
 	 * 
 	 * @param string $uri Uri to redirect
 	 * @param int $code Response code
-	 * @return SF_Response
+	 * @return Response
 	 */
 	public function redirect($uri, $code = 302)
 	{
