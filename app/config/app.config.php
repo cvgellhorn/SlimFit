@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Default settings:
+ *
  * base_path: No base path == /
  */
 
@@ -12,8 +14,8 @@ $production = [
 		'host'      => 'localhost',
 		'port'      => 3306,
 		'user'      => 'root',
-		'password'  => 'isa99#',
-		'database'  => 'skelappton'
+		'password'  => 'live123#',
+		'database'  => 'slimfit'
 	],
 	'auth'          => [
 		'adapter'   => 'db',
@@ -24,12 +26,15 @@ $production = [
 // Development settings
 $development = [
 	'db' => [
-		'database'  => 'slimfit_dev'
+		'database'  => 'slimfit_dev',
+		'user'      => 'root',
+		'password'  => 'dev123#'
 	]
 ];
 
 
+// Current environment inherit config from live environment
 return [
-	'production'    => $production,
-	'development'   => $development
+	Config::ENV_LIVE => $production,
+	Config::ENV_DEV  => $development
 ];
