@@ -1,12 +1,25 @@
 <?php namespace SlimFit;
 
+use SlimFit\Error;
+
 /**
- * SlimFit Initializer
+ * SlimFit Configuration
  * 
  * @author cvgellhorn
  */
 class Config
 {
+	/**
+	 * Application environments
+	 */
+	const ENV_LIVE    = 'production';
+	const ENV_STAGING = 'staging';
+	const ENV_TESTING = 'testing';
+	const ENV_DEV     = 'development';
+
+	/**
+	 * Configuration filename
+	 */
 	const FILENAME = 'app.config.php';
 
 	/**
@@ -16,16 +29,24 @@ class Config
 
 	/**
 	 * Initialize application config
-	 *
-	 * TODO: merge production and development data
 	 */
 	public static function init()
 	{
-		$configFile = APP_DIR . DS . 'config' . DS . self::FILENAME;
-		self::$_data = require_once($configFile);
-
 		// Global alias for faster access
 		class_alias('\SlimFit\Config', 'Config');
+
+		$file = APP_DIR . DS . 'config' . DS . self::FILENAME;
+		$config = require_once($file);
+
+		if (!isset($config[self::ENV_LIVE])) {
+			throw new Error('No production configuration found');
+		}
+
+		// Merge environment config data
+		self::$_data = array_replace_recursive(
+			$config[self::ENV_LIVE],
+			$config[APP_ENV]
+		);
 	}
 
 	/**
@@ -51,8 +72,10 @@ class Config
 	 * @param string $name Ini key
 	 * @return mixed Ini setting
 	 */
-	public static function get($name)
+	public static function get($name = null)
 	{
+		if (null === $name) return self::$_data;
+
 		return (isset(self::$_data[$name])) ? self::$_data[$name] : null;
 	}
 }
