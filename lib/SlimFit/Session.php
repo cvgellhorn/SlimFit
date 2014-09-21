@@ -1,11 +1,11 @@
-<?php
+<?php namespace SlimFit;
 
 /**
  * Main Session
  *
  * @author cvgellhorn
  */
-class SF_Session
+class Session
 {
 	/**
 	 * Check whether or not the session was started
