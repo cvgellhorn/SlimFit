@@ -12,7 +12,7 @@ class Config
 	/**
 	 * @var array Application config
 	 */
-	private static $_data = array();
+	private static $_data = [];
 
 	/**
 	 * Initialize application config
