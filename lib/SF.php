@@ -1,6 +1,7 @@
 <?php
 
 use SlimFit\Config;
+use SlimFit\Request;
 use SlimFit\Router;
 
 /**
@@ -99,6 +100,6 @@ final class SF
 	public static function run()
 	{
 		Config::init();
-		//Router::getInstance()->route(SF_Request::getInstance());
+		Router::load()->route(Request::load());
 	}
 }
