@@ -37,7 +37,7 @@ class Request
 	 * 
 	 * @return Request
 	 */
-	public static function getInstance()
+	public static function load()
 	{
 		if (null === self::$_instance) {
 			self::$_instance = new self();
