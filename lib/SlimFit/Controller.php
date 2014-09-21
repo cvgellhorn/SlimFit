@@ -1,19 +1,23 @@
-<?php
+<?php namespace SlimFit;
+
+use SlimFit\Request;
+use SlimFit\Response;
+use SlimFit\View;
 
 /**
  * Main SlimFit Controller
  *
  * @author cvgellhorn
  */
-class SF_Controller
+class Controller
 {
 	/**
 	 * @const Global controller defaults
 	 */
 	const DEFAULT_CONTROLLER = 'index';
-	const DEFAULT_ACTION = 'index';
-	const ACTION_SUFFIX = 'Action';
-	const CONTROLLER_SUFFIX = '';
+	const DEFAULT_ACTION     = 'index';
+	const ACTION_SUFFIX      = 'Action';
+	const CONTROLLER_SUFFIX  = 'Controller';
 
 	/**
 	 * @var bool Load action view
@@ -31,12 +35,12 @@ class SF_Controller
 	private $_useView;
 	
 	/**
-	 * @var SF_Request
+	 * @var Request
 	 */
 	protected $request;
 	
 	/**
-	 * @var SF_View
+	 * @var View
 	 */
 	protected $view;
 	
@@ -45,8 +49,8 @@ class SF_Controller
 	 */
 	public function __construct()
 	{
-		$this->request = SF_Request::getInstance();
-		$this->view = new SF_View();
+		$this->request = Request::load();
+		$this->view = new View();
 
 		// Call child constructor
 		$this->_init();
@@ -138,6 +142,6 @@ class SF_Controller
 	 */
 	protected function redirect($uri)
 	{
-		SF_Response::getInstance()->redirect($uri);
+		Response::load()->redirect($uri);
 	}
 }
