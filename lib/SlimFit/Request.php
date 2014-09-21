@@ -1,16 +1,16 @@
-<?php
+<?php namespace SlimFit;
 
 /**
  * Main Request object
  * 
  * @author cvgellhorn
  */
-class SF_Request
+class Request
 {
 	/**
 	 * Instance implementation
 	 *
-	 * @var SF_Request
+	 * @var Request
 	 */
 	private static $_instance = null;
 
@@ -25,7 +25,7 @@ class SF_Request
 	/**
 	 * @var array Instance parameters
 	 */
-	private $_params = array();
+	private $_params = [];
 
 	/**
 	 * @var bool Is internal request
@@ -35,12 +35,13 @@ class SF_Request
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return SF_Request
+	 * @return Request
 	 */
 	public static function getInstance()
 	{
-		if (null === self::$_instance)
+		if (null === self::$_instance) {
 			self::$_instance = new self();
+		}
 
 		return self::$_instance;
 	}
@@ -56,7 +57,8 @@ class SF_Request
 	/**
 	 * Private clone cause single pattern implementation
 	 */
-	private function __clone() {}
+	private function __clone()
+	{}
 	
 	/**
 	 * Get the current requested uri
@@ -72,7 +74,7 @@ class SF_Request
 	 * Set new request uri
 	 * 
 	 * @param string $uri New request uri
-	 * @return SF_Request
+	 * @return Request
 	 */
 	public function setUri($uri)
 	{
@@ -104,7 +106,7 @@ class SF_Request
 	 * Set the current controller name
 	 * 
 	 * @param string $controller Controller name
-	 * @return SF_Request
+	 * @return Request
 	 */
 	public function setControllerName($controller)
 	{
@@ -126,7 +128,7 @@ class SF_Request
 	 * Set the current action
 	 * 
 	 * @param string $name Action name
-	 * @return SF_Request
+	 * @return Request
 	 */
 	public function setActionName($name)
 	{
@@ -141,7 +143,7 @@ class SF_Request
      *
      * @param string $key
      * @param mixed $val
-     * @return SF_Request
+     * @return Request
      */
 	public function setParam($key, $val)
 	{
@@ -189,7 +191,7 @@ class SF_Request
 	/**
      * Unset all user parameters
      *
-     * @return SF_Request
+     * @return Request
      */
     public function clearParams()
     {
@@ -208,8 +210,7 @@ class SF_Request
      */
 	public function getServer($key = null, $default = null)
 	{
-		if (null === $key)
-			return $_SERVER;
+		if (null === $key) return $_SERVER;
 
 		return (isset($_SERVER[$key])) ? $_SERVER[$key] : $default;
 	}
@@ -225,8 +226,7 @@ class SF_Request
      */
 	public function getGet($key = null, $default = null)
 	{
-		if (null === $key)
-			return $_GET;
+		if (null === $key) return $_GET;
 
 		return (isset($_GET[$key])) ? $_GET[$key] : $default;
 	}
@@ -242,8 +242,7 @@ class SF_Request
      */
 	public function getPost($key = null, $default = null)
 	{
-		if (null === $key)
-			return $_POST;
+		if (null === $key) return $_POST;
 
 		return (isset($_POST[$key])) ? $_POST[$key] : $default;
 	}
@@ -260,19 +259,16 @@ class SF_Request
 	{
 		// Try to get it from the $_SERVER array first
 		$temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
-		if (isset($_SERVER[$temp]))
-			return $_SERVER[$temp];
+		if (isset($_SERVER[$temp])) return $_SERVER[$temp];
 
 		// Seems to be the only way to get the Authorization header on Apache
 		if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
-			if (isset($headers[$header]))
-				return $headers[$header];
+			if (isset($headers[$header])) return $headers[$header];
 
 			$header = strtolower($header);
 			foreach ($headers as $key => $value) {
-				if (strtolower($key) == $header)
-					return $value;
+				if (strtolower($key) == $header) return $value;
 			}
 		}
 
@@ -317,7 +313,7 @@ class SF_Request
      *
      * @return boolean
      */
-	public function isAjaxRequest()
+	public function isAjax()
 	{
 		return ($this->getHeader('X_REQUESTED_WITH') == 'XMLHttpRequest');
 	}
