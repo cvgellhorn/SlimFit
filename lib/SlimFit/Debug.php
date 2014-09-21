@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SF Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
+ * SlimFit Debug Class (based on Zend Framework 1.12 Zend_Debug.php)
  * 
  * @author cvgellhorn
  */

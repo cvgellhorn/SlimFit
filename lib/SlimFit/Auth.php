@@ -131,7 +131,7 @@ class SF_Auth
 					$adapterClass = new SF_Auth_Db();
 					break;
 				default:
-					throw new SF_Exception('Unknown Auth Adapter declared in application.config.php');
+					throw new SF_Exception('Unknown Auth Adapter declared in app.config.php');
 					break;
 
 			}

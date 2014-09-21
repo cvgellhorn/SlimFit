@@ -1,24 +1,22 @@
-<?php
+<?php namespace SlimFit;
 
-// Autoloader doesn't grap router exceptions
-require_once 'SF/Router/Exception.php';
 
 /**
  * Global Router
  * 
  * @author cvgellhorn
  */
-class SF_Router
+class Router
 {
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return SF_Router Instance
+	 * @return Router Instance
 	 */
 	private static $_instance = null;
 	
 	/**
-	 * SF router
+	 * SlimFit router
 	 * 
 	 * @var SF_Router_Router
 	 */

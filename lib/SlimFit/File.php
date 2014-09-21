@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SF file manager
+ * SlimFit file manager
  *
  * @author cvgellhorn
  */

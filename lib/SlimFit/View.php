@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main SF View
+ * Main SlimFit View
  *
  * @author cvgellhorn
  */

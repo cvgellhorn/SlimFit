@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main SF Controller
+ * Main SlimFit Controller
  *
  * @author cvgellhorn
  */
@@ -71,7 +71,7 @@ class SF_Controller
 	{}
 	
 	/**
-	 * Do SF authentication
+	 * Do SlimFit authentication
 	 */
 	public function __doAuth()
 	{
@@ -81,7 +81,7 @@ class SF_Controller
 		
 		if (App_Ini::get('auth')) {
 			//-- Do auth
-			require_once 'SF/Auth.php';
+			require_once 'SlimFit/Auth.php';
 			$auth = App_Auth::getInstance();
 		}*/
 	}
