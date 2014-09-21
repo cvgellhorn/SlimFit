@@ -1,7 +1,7 @@
-<?php namespace SF;
+<?php namespace SlimFit;
 
 /**
- * SF Initializer
+ * SlimFit Initializer
  * 
  * @author cvgellhorn
  */
@@ -25,7 +25,7 @@ class Config
 		self::$_data = require_once($configFile);
 
 		// Global alias for faster access
-		class_alias('\SF\Config', 'Config');
+		class_alias('\SlimFit\Config', 'Config');
 	}
 
 	/**
