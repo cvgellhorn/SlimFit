@@ -1,4 +1,4 @@
-<?php namespace SF;
+<?php namespace SlimFit;
 
 /**
  * Autoloader
