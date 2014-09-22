@@ -1,9 +1,9 @@
-SlimFit
+SlimFit 2.0
 ===========
 
 A simple mvc based PHP skeleton framework.
 
-Still working on it...
+Still refactoring... 
 
 ##Requirements
 * Min. PHP 5.4.x
