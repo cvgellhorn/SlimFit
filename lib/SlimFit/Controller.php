@@ -86,10 +86,10 @@ class Controller
 	public function __loadView()
 	{
 		if ($this->_renderView) {
+			$controller = $this->request->getControllerName();
 			$action = (null !== $this->_useView)
 				? $this->_useView
 				: $this->request->getActionName();
-			$controller = $this->request->getControllerName();
 			
 			if ($this->request->isInternal() || !$this->_useTemplate) {
 				$this->view->loadView($action, $controller);
