@@ -26,11 +26,6 @@ class Controller
 	private $_renderView = true;
 	
 	/**
-	 * @var bool Load layout template
-	 */
-	private $_useTemplate = true;
-	
-	/**
 	 * @var string Use another view
 	 */
 	private $_useView;
@@ -87,15 +82,12 @@ class Controller
 	{
 		if ($this->_renderView) {
 			$controller = $this->request->getControllerName();
-			$action = (null !== $this->_useView)
-				? $this->_useView
-				: $this->request->getActionName();
-			
-			if ($this->request->isInternal() || !$this->_useTemplate) {
-				$this->view->loadView($action, $controller);
-			} else {
-				$this->view->loadLayoutView($action, $controller);
-			}
+			$action = (null === $this->_useView)
+				? $this->request->getActionName()
+				: $this->_useView;
+
+			// Load template from current view
+			$this->view->loadView($action, $controller);
 		}
 	}
 
@@ -115,14 +107,6 @@ class Controller
 	protected function setNoRender()
 	{
 		$this->_renderView = false;
-	}
-	
-	/**
-	 * Set no layout template
-	 */
-	protected function setNoTemplate()
-	{
-		$this->_useTemplate = false;
 	}
 	
 	/**
