@@ -1,6 +1,5 @@
 <?php namespace SlimFit;
 
-
 /**
  * Global Router
  * 
@@ -25,20 +24,20 @@ class Router
 	/**
 	 * Dispatcher
 	 * 
-	 * @var SF_Router_Dispatcher
+	 * @var \SlimFit\Router\Dispatcher
 	 */
 	private $_dispatcher;
 	
 	/**
 	 * Single pattern implementation
-	 * 
-	 * @param SF_Router_Route $route Defined allowed route
-	 * @return SF_Router Instance
+	 *
+	 * @return Router Instance
 	 */
-	public static function getInstance($route = null)
+	public static function load()
 	{
-		if (null === self::$_instance)
-			self::$_instance = new self($route);
+		if (null === self::$_instance) {
+			self::$_instance = new self();
+		}
 		
 		return self::$_instance;
 	}
@@ -86,12 +85,6 @@ class Router
 	}
 	
 	/**
-	 * Private clone cause single pattern implementation
-	 */
-	private function __clone()
-	{}
-	
-	/**
 	 * Get current router
 	 * 
 	 * @return SF_Router_Router
@@ -114,7 +107,7 @@ class Router
 	/**
 	 * Do routing
 	 * 
-	 * @param SF_Request $request Request object
+	 * @param Request $request Request object
 	 */
 	public function route($request = null)
 	{

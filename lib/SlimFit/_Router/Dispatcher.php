@@ -1,4 +1,7 @@
-<?php
+<?php namespace SlimFit\Router;
+
+use SlimFit\Controller;
+use SlimFit\Error;
 
 /**
  * Original Version:
@@ -13,7 +16,7 @@
  * 
  * @author cvgellhorn
  */
-class SF_Router_Dispatcher
+class Dispatcher
 {
 	/**
 	 * The suffix used to append to the class name
@@ -34,7 +37,7 @@ class SF_Router_Dispatcher
 	 */
 	public function __construct()
 	{
-		$this->suffix = SF_Controller::CONTROLLER_SUFFIX;
+		$this->suffix = Controller::CONTROLLER_SUFFIX;
 	}
 
 	/**
@@ -104,21 +107,18 @@ class SF_Router_Dispatcher
 	 * @param string $controller
 	 * @param string $action
 	 * @param array $args
-	 * @return mixed - result of controller method
+	 * @throws Error
 	 */
-	protected function dispatchController($controller, $action, $args, $context = null)
+	protected function dispatchController($controller, $action, $args)
 	{
-		$obj = new $controller($context);
-		if($obj instanceof SF_Controller) {
+		$obj = new $controller();
+		if ($obj instanceof Controller) {
 			$obj->preDispatch();
-			$obj->__doAuth();
 			$obj->{$action}($args);
 			$obj->__loadView();
 			$obj->postDispatch();
 		} else {
-			throw new Router_NoSFControllerException(
-				$controller . ' is not an instance of APP_Controller'
-			);
+			throw new Error($controller . ' is not an instance of \SlimFit\Controller');
 		}
 	}
 

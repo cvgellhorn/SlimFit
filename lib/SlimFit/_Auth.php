@@ -1,54 +1,58 @@
-<?php
+<?php namespace SlimFit;
+
+use SlimFit\Config;
+use SlimFit\Error;
 
 /**
  * Authentication class
  *
  * @author cvgellhorn
  */
-class SF_Auth
+class Auth
 {
 	/**
 	 * Instance implementation
 	 * 
-	 * @var SF_Auth
+	 * @var Auth
 	 */
 	private static $_instance = null;
 	
 	/**
 	 * Auth identity object
 	 * 
-	 * @var SF_Auth_Identity
+	 * @var Auth_Identity
 	 */
 	private $_identity = null;
 	
 	/**
 	 * Auth adapter
 	 * 
-	 * @var SF_Auth_Db
+	 * @var Auth_Db
 	 */
 	private $_authAdapter = null;
 	
 	/**
 	 * Single pattern implementation
 	 * 
-	 * @return SF_Auth
+	 * @return Auth
 	 */
-	public static function getInstance()
+	public static function load()
 	{
-		if (null === self::$_instance)
+		if (null === self::$_instance) {
 			self::$_instance = new self();
-		
+		}
+
 		return self::$_instance;
 	}
 
 	/**
 	 * Get current user object
 	 *
-	 * @return SF_Auth_Identity
+	 * @return Auth_Identity
 	 */
 	public static function getUser()
 	{
-		return self::getInstance()->getIdentity();
+		return self::load()->getIdentity();
 	}
 	
 	/**
@@ -74,7 +78,7 @@ class SF_Auth
 	/**
 	 * Get user identity object
 	 * 
-	 * @return SF_Auth_Identity
+	 * @return Auth_Identity
 	 */
 	public function getIdentity()
 	{
@@ -84,14 +88,14 @@ class SF_Auth
 	/**
 	 * Set identity object
 	 * 
-	 * @param SF_Auth_Identity $identity Identity object
-	 * @return SF_Auth
-	 * @throws SF_Exception
+	 * @param Auth_Identity $identity Identity object
+	 * @return Auth
+	 * @throws Error
 	 */
-	public function setIdentity(SF_Auth_Identity $identity)
+	public function setIdentity(Auth_Identity $identity)
 	{
 		if ($this->hasIdentity()) {
-			throw new SF_Exception('Can\'t set identity of already authenticated user');
+			throw new Error('Can\'t set identity of already authenticated user');
 		}
 		
 		$this->_identity = $identity;
@@ -119,19 +123,19 @@ class SF_Auth
 	/**
 	 * Get the current authentication adapter
 	 * 
-	 * @return SF_Auth_Db
-	 * @throws SF_Exception
+	 * @return Auth_Db
+	 * @throws Error
 	 */
 	public function getAdapter()
 	{
 		if (null === $this->_authAdapter) {
-			$adapter = SF_Ini::get('auth')['adapter'];
+			$adapter = Config::get('auth')['adapter'];
 			switch ($adapter) {
 				case 'db':
-					$adapterClass = new SF_Auth_Db();
+					$adapterClass = new Auth_Db();
 					break;
 				default:
-					throw new SF_Exception('Unknown Auth Adapter declared in app.config.php');
+					throw new Error('Unknown Auth Adapter declared in app.config.php');
 					break;
 
 			}
