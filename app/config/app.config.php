@@ -8,6 +8,7 @@
 
 // Live settings
 $production = [
+	'app_name'      => 'SlimFit',
 	'base_path'		=> '/slimfit/',
 	'template'		=> 'default',
 	'db'            => [
