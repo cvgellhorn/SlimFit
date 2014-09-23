@@ -4,9 +4,11 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Skelappton</title>
+		<title><?php echo $this->title; ?></title>
+		<?php echo $this->getCSSDom(); ?>
 	</head>
 	<body>
-		<?php $this->_getContent(); ?>
+		<?php echo $this->content; ?>
+		<?php echo $this->getJSDom(); ?>
 	</body>
 </html>
