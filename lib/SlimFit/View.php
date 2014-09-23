@@ -13,27 +13,7 @@ use SlimFit\Error;
 class View
 {
 	/**
-	 * @var Controller and action for dynamic layout loading
-	 */
-	private $_layoutAction;
-	private $_layoutController;
-	
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{}
-
-	/**
-	 * Get action content in default layout
-	 */
-	private function _getContent()
-	{
-		$this->loadView($this->_layoutAction, $this->_layoutController);
-	}
-	
-	/**
-	 * Load view from controller action
+	 * Load action view
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
@@ -41,46 +21,18 @@ class View
 	 */
 	public function loadView($action, $controller)
 	{
-		try {
-			$viewPath = APP_DIR . DS .  'views' . DS
-				. $controller . DS . $action . '.phtml';
-			
-			if (file_exists($viewPath)) {
-				require_once($viewPath);
-			} else {
-				throw new Error('File does not exists' . $action . '.phtml');
-			}
-		} catch (Error $e) {
-			throw new Error('Could not load view from action: ' . $action);
-		}
-	}
-	
-	/**
-	 * Load view from controller action with default layout
-	 *
-	 * @param string $action Current action name 
-	 * @param string $controller Current controller name
-	 * @throws Error If main template not exists
-	 */
-	public function loadLayoutView($action, $controller)
-	{
-		// Set current controller and action for layout loading
-		$this->_layoutAction = $action;
-		$this->_layoutController = $controller;
-		
-		$layoutPath = APP_DIR . DS .  'layout' . DS
-			. Config::get('template') . '.phtml';
+		$viewPath = APP_DIR.DS.'views'.DS.$controller.DS.$action.'.phtml';
 
-		if (file_exists($layoutPath)) {
-			require_once($layoutPath);
+		if (file_exists($viewPath)) {
+			require_once($viewPath);
 		} else {
-			throw new Error('Layout template does not exists: '
-				. Config::get('template') . '.phtml');
+			throw new Error('Could not load action view: ' . $controller.'/'.$action
+				. '. File does not exist: ' . $action . '.phtml');
 		}
 	}
 	
 	/**
-	 * Load controler action
+	 * Call controller action
 	 * 
 	 * @param string $action Action name
 	 * @param string $controller Controller name
