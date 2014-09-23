@@ -91,7 +91,7 @@ class Controller
 				: $this->request->getActionName();
 			$controller = $this->request->getControllerName();
 			
-			if($this->request->isInternal() || !$this->_useTemplate) {
+			if ($this->request->isInternal() || !$this->_useTemplate) {
 				$this->view->loadView($action, $controller);
 			} else {
 				$this->view->loadLayoutView($action, $controller);
@@ -133,7 +133,7 @@ class Controller
 	protected function useView($view)
 	{
 		$this->_renderView = true;	
-		$this->_useView = $view;
+		$this->_useView    = $view;
 	}
 	
 	/**
