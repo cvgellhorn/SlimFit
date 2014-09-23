@@ -2,6 +2,7 @@
 
 use SlimFit\Request;
 use SlimFit\Response;
+use SlimFit\Layout;
 use SlimFit\View;
 
 /**
@@ -38,6 +39,11 @@ class Controller
 	 * @var Request
 	 */
 	protected $request;
+
+	/**
+	 * @var Layout
+	 */
+	protected $layout;
 	
 	/**
 	 * @var View
@@ -50,7 +56,7 @@ class Controller
 	public function __construct()
 	{
 		$this->request = Request::load();
-		$this->view = new View();
+		$this->view    = new View();
 
 		// Call child constructor
 		$this->_init();
@@ -61,13 +67,13 @@ class Controller
 	 */
 	protected function _init()
 	{}
-	
+
 	/**
 	 * Is called before an action is dispatched
 	 */
 	public function preDispatch()
 	{}
-	
+
 	/**
 	 * Is called after an action is dispatched
 	 */
@@ -75,29 +81,14 @@ class Controller
 	{}
 	
 	/**
-	 * Do SlimFit authentication
-	 */
-	public function __doAuth()
-	{
-		// Do Auth
-		/*if($this->request->isInternal())
-			return;
-		
-		if (App_Ini::get('auth')) {
-			//-- Do auth
-			require_once 'SlimFit/Auth.php';
-			$auth = App_Auth::getInstance();
-		}*/
-	}
-	
-	/**
 	 * Load action view
 	 */
 	public function __loadView()
 	{
 		if ($this->_renderView) {
-			$action = (null !== $this->_useView) ? $this->_useView :
-				$this->request->getActionName();
+			$action = (null !== $this->_useView)
+				? $this->_useView
+				: $this->request->getActionName();
 			$controller = $this->request->getControllerName();
 			
 			if($this->request->isInternal() || !$this->_useTemplate) {
@@ -106,6 +97,16 @@ class Controller
 				$this->view->loadLayoutView($action, $controller);
 			}
 		}
+	}
+
+	/**
+	 * Load the current layout and cache it
+	 *
+	 * @return Layout
+	 */
+	protected function loadLayout()
+	{
+		return $this->layout = Layout::load();
 	}
 	
 	/**
