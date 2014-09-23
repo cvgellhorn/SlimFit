@@ -69,11 +69,9 @@ class Layout
 	/**
 	 * Load view from controller action with default layout
 	 *
-	 * @param string $action Current action name
-	 * @param string $controller Current controller name
 	 * @throws Error If main template not exists
 	 */
-	public function loadView($action, $controller)
+	public function loadView()
 	{
 		$layoutPath = APP_DIR.DS.'layout'.DS.Config::get('template').'.phtml';
 
