@@ -10,7 +10,7 @@
 $production = [
 	'app_name'      => 'SlimFit',
 	'base_path'		=> '/slimfit/',
-	'template'		=> 'default',
+	'layout'		=> 'default',
 	'db'            => [
 		'host'      => 'localhost',
 		'port'      => 3306,
