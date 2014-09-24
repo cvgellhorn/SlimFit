@@ -73,13 +73,13 @@ class Layout
 	 */
 	public function loadView()
 	{
-		$layoutPath = APP_DIR.DS.'layout'.DS.Config::get('template').'.phtml';
+		$layoutFile = Config::get('layout') . '.phtml';
+		$layoutPath = APP_DIR . DS . 'layout' . DS . $layoutFile;
 
 		if (file_exists($layoutPath)) {
 			require_once($layoutPath);
 		} else {
-			throw new Error('Layout template does not exists: '
-				. Config::get('template') . '.phtml');
+			throw new Error('Layout template does not exists: ' . $layoutFile);
 		}
 	}
 
