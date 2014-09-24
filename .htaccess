@@ -5,11 +5,11 @@ SetEnv APP_ENV development
     Options +FollowSymLinks
     RewriteEngine on
 
-    # TRACE and TRACK HTTP methods disabled to prevent XSS attacks
+    # Disable TRACE and TRACK HTTP methods to prevent XSS attacks
     RewriteCond %{REQUEST_METHOD} ^TRAC[EK]
     RewriteRule .* - [L,R=405]
 
-    # Always send 404 on missing files in these folders
+    # Send 404 on missing files in these folders
     RewriteCond %{REQUEST_URI} !^/(media|skin|public)/
 
     # Never rewrite for existing files, directories and links
@@ -22,7 +22,7 @@ SetEnv APP_ENV development
 </IfModule>
 
 <IfModule mod_expires.c>
-    # Add default Expires header
+    # Add default expires header
     ExpiresDefault "access plus 1 year"
 </IfModule>
 
