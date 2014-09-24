@@ -43,10 +43,14 @@ class Config
 		}
 
 		// Merge environment config data
-		self::$_data = array_replace_recursive(
-			$config[self::ENV_LIVE],
-			$config[APP_ENV]
-		);
+		if (APP_ENV != self::ENV_LIVE) {
+			self::$_data = array_replace_recursive(
+				$config[self::ENV_LIVE],
+				$config[APP_ENV]
+			);
+		} else {
+			self::$_data = $config[APP_ENV];
+		}
 	}
 
 	/**
