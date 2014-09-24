@@ -1,11 +1,13 @@
-<?php
+<?php namespace SlimFit;
+
+use ArrayAccess;
 
 /**
  * Main data model
  *
  * @author cvgellhorn
  */
-class SF_Model implements ArrayAccess
+class Model implements ArrayAccess
 {
 	/**
 	 * @var data to return
