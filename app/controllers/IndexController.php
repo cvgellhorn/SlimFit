@@ -8,7 +8,7 @@ use SlimFit\Debug;
  *
  * @author cvgellhorn
  */
-class Index extends Controller
+class IndexController extends Controller
 {
 	public function indexAction()
 	{
