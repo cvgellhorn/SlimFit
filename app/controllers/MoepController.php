@@ -8,7 +8,7 @@ use SlimFit\Debug;
  *
  * @author cvgellhorn
  */
-class Moep extends Controller
+class MoepController extends Controller
 {
 	public function indexAction($test)
 	{
