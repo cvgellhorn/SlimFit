@@ -12,10 +12,10 @@ defined('APP_ENV') || define('APP_ENV',
 	(getenv('APP_ENV') ? getenv('APP_ENV') : 'production'));
 
 // Set include path
-set_include_path(implode(PATH_SEPARATOR, array(
+set_include_path(implode(PATH_SEPARATOR, [
 	BASE_DIR . 'lib',
     get_include_path(),
-)));
+]));
 
 // Register autoloader
 require_once('SlimFit/Autoloader.php');
