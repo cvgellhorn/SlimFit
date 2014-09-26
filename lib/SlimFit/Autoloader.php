@@ -20,7 +20,7 @@ class Autoloader
 	public static function register()
 	{
 		if (!self::$_registered) {
-			self::$_registered = spl_autoload_register(array('self', 'load'));
+			self::$_registered = spl_autoload_register(['self', 'load']);
 		}
 	}
 
