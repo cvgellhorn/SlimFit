@@ -35,7 +35,7 @@ class Autoloader
 		// Trim unnecessary backslash
 		if ($class[0] == '\\') $class = substr($class, 1);
 
-		return str_replace(array('\\', '_'), DS, $class) . '.php';
+		return str_replace(['\\', '_'], DS, $class) . '.php';
 	}
 
 	/**
