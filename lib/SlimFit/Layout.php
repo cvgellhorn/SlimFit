@@ -61,7 +61,7 @@ class Layout
 	/**
 	 * Layout Constructor, sets default title
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		$this->title = Config::get('app_name');
 	}
@@ -84,21 +84,64 @@ class Layout
 	}
 
 	/**
-	 * Add HTML DOM stylesheet
+	 * Add item to given item list
 	 *
-	 * @param string $key Stylesheet key
-	 * @param string|null $style Stylesheet
-	 * @param string|null $after Stylesheet position
+	 * @param array $items Items
+	 * @param string $key Item key
+	 * @param null | string $value Item to add
+	 * @param null | string $after Insert new item after given item key
 	 */
-	public function addCSS($key, $style = null, $after = null)
+	public function addItem(&$items, $key, $value = null, $after = null)
 	{
 		if (is_array($key)) {
 			foreach ($key as $k => $v) {
-				$this->css[$k] = $v;
+				$items[$k] = $v;
 			}
 		} else {
-			$this->css[$key] = $style;
+			if ($after) {
+				// Remove item if exists
+				unset($items[$key]);
+
+				$pos = array_search($after, array_keys($items)) + 1;
+				array_splice($items, $pos, 0, [$key]);
+
+				$items = array_combine(
+					array_replace(array_keys($items), [$pos => $key]),
+					array_values($items)
+				);
+			} else {
+				$items[$key] = $value;
+			}
 		}
+;	}
+
+	/**
+	 * Get items HTML DOM templates
+	 *
+	 * @param array $data Items to implode
+	 * @param string $template HTML DOM template
+	 * @return string Filled DOM template
+	 */
+	public function getItemDom(&$data, $template)
+	{
+		$items = [];
+		foreach ($data as $val) {
+			$items[] = str_replace('?', $val, $template);
+		}
+
+		return (!empty($items)) ? implode(PHP_EOL, $items) : '';
+	}
+
+	/**
+	 * Add HTML DOM stylesheet
+	 *
+	 * @param string $key Stylesheet key
+	 * @param null | string $style Stylesheet
+	 * @param null | string $after Insert new style after given style key
+	 */
+	public function addCSS($key, $style = null, $after = null)
+	{
+		$this->addItem($this->css, $key, $style, $after);
 	}
 
 	/**
@@ -118,14 +161,7 @@ class Layout
 	 */
 	public function getCSSDom()
 	{
-		$template = '<link rel="stylesheet" type="text/css" href="?" >';
-
-		$styles = [];
-		foreach ($this->js as $style) {
-			$styles[] = str_replace('?', $style, $template);
-		}
-
-		return (!empty($styles)) ? implode(PHP_EOL, $styles) : '';
+		return $this->getItemDom($this->css, '<link rel="stylesheet" type="text/css" href="?">');
 	}
 
 	/**
@@ -137,13 +173,7 @@ class Layout
 	 */
 	public function addJS($key, $script = null, $after = null)
 	{
-		if (is_array($key)) {
-			foreach ($key as $k => $v) {
-				$this->js[$k] = $v;
-			}
-		} else {
-			$this->js[$key] = $script;
-		}
+		$this->addItem($this->js, $key, $script, $after);
 	}
 
 	/**
@@ -163,13 +193,6 @@ class Layout
 	 */
 	public function getJSDom()
 	{
-		$template = '<script type="text/javascript" src="?"></script>';
-
-		$scripts = [];
-		foreach ($this->js as $script) {
-			$scripts[] = str_replace('?', $script, $template);
-		}
-
-		return (!empty($scripts)) ? implode(PHP_EOL, $scripts) : '';
+		return $this->getItemDom($this->js, '<script type="text/javascript" src="?"></script>');
 	}
 }
