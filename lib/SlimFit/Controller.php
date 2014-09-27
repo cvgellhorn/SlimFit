@@ -56,25 +56,7 @@ class Controller
 		// Call child constructor
 		$this->init();
 	}
-	
-	/**
-	 * Constructor for child classes
-	 */
-	protected function init()
-	{}
 
-	/**
-	 * Is called before an action is dispatched
-	 */
-	public function preDispatch()
-	{}
-
-	/**
-	 * Is called after an action is dispatched
-	 */
-	public function postDispatch()
-	{}
-	
 	/**
 	 * Load action view
 	 */
@@ -90,6 +72,24 @@ class Controller
 			$this->view->loadView($action, $controller);
 		}
 	}
+
+	/**
+	 * Is called before an action is dispatched
+	 */
+	public function preDispatch()
+	{}
+
+	/**
+	 * Is called after an action is dispatched
+	 */
+	public function postDispatch()
+	{}
+
+	/**
+	 * Constructor for child classes
+	 */
+	protected function init()
+	{}
 
 	/**
 	 * Load the current layout and cache it
