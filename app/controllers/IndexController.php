@@ -17,7 +17,16 @@ class IndexController extends Controller
 
 	public function indexAction()
 	{
-		$layout = $this->loadLayout();
-		$layout->addCSS(['main' => 'css/main.css']);
+		// Set no view renderer
+		$this->setNoRender();
+
+		// Set no view and layout renderer
+		$this->setNoRender(true);
+
+		// Set no layout renderer
+		$this->loadLayout()->setNoRender();
+
+		// Add css to layout header
+		$this->loadLayout()->addCSS(['main' => 'css/main.css']);
 	}
 }
