@@ -54,13 +54,13 @@ class Controller
 		$this->view    = new View();
 
 		// Call child constructor
-		$this->_init();
+		$this->init();
 	}
 	
 	/**
 	 * Constructor for child classes
 	 */
-	protected function _init()
+	protected function init()
 	{}
 
 	/**
