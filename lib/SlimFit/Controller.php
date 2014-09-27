@@ -98,7 +98,11 @@ class Controller
 	 */
 	protected function loadLayout()
 	{
-		return $this->layout = Layout::load();
+		if (null === $this->layout) {
+			$this->layout = Layout::load();
+		}
+
+		return $this->layout;
 	}
 	
 	/**
