@@ -104,13 +104,19 @@ class Controller
 
 		return $this->layout;
 	}
-	
+
 	/**
-	 * Set no view renderer
+	 * Set no view renderer (plus no layout renderer)
+	 *
+	 * @param bool $noLayoutRender Set no layout renderer
 	 */
-	protected function setNoRender()
+	protected function setNoRender($noLayoutRender = false)
 	{
 		$this->_renderView = false;
+
+		if ($noLayoutRender) {
+			$this->loadLayout()->setNoRender();
+		}
 	}
 	
 	/**
