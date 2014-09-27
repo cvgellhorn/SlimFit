@@ -17,6 +17,13 @@ class Layout
 	private static $_instance = null;
 
 	/**
+	 * Layout rendering
+	 *
+	 * @var bool
+	 */
+	public $render = true;
+
+	/**
 	 * HTML DOM title
 	 *
 	 * @var string
@@ -81,6 +88,14 @@ class Layout
 		} else {
 			throw new Error('Layout template does not exists: ' . $layoutFile);
 		}
+	}
+
+	/**
+	 * Set no layout renderer
+	 */
+	public function setNoRender()
+	{
+		$this->render = false;
 	}
 
 	/**
