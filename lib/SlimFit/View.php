@@ -38,7 +38,7 @@ class View
 	 * @param string $controller Controller name
 	 * @param mixed $params Action params
 	 */
-	public function action($action, $controller, $params = array())
+	public function action($action, $controller, $params = [])
 	{
 		// Add given params into request
 		$request = Request::load();

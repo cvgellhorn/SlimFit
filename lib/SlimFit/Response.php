@@ -18,7 +18,7 @@ class Response
      * Array of headers. Each header is an array with keys 'name' and 'value'
      * @var array
      */
-	protected $_headers = array();
+	protected $_headers = [];
 	
 	/**
      * HTTP response code to use in headers
@@ -64,11 +64,11 @@ class Response
             }
         }
 		
-		$this->_headers[] = array(
+		$this->_headers[] = [
             'name'    => $name,
             'value'   => $val,
             'replace' => $replace
-        );
+        ];
 
         return $this;
 	}

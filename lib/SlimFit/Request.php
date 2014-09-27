@@ -189,7 +189,7 @@ class Request
      */
     public function clearParams()
     {
-        $this->_params = array();
+        $this->_params = [];
         return $this;
     }
 	
