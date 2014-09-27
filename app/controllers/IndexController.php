@@ -20,7 +20,7 @@ class IndexController extends Controller
 		// Set no view renderer
 		$this->setNoRender();
 
-		// Set no view and layout renderer
+		// Set no view and layout renderer (for ajax calls)
 		$this->setNoRender(true);
 
 		// Set no layout renderer
