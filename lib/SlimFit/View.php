@@ -26,7 +26,7 @@ class View
 		if (file_exists($viewPath)) {
 			require_once($viewPath);
 		} else {
-			throw new Error('Could not load action view: ' . $controller.'/'.$action
+			throw new Error('Could not load action view: ' . $controller.DS.$action
 				. '. File does not exist: ' . $action . '.phtml');
 		}
 	}
