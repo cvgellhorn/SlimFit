@@ -16,10 +16,6 @@ $production = [
 		'user'      => 'root',
 		'password'  => 'live123#',
 		'database'  => 'slimfit'
-	],
-	'auth'          => [
-		'adapter'   => 'db',
-		'db_table'  => 'user'
 	]
 ];
 
