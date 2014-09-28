@@ -5,7 +5,7 @@ defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 
 // Define application main directories
 defined('BASE_DIR') || define('BASE_DIR', __DIR__ . DS);
-define('APP_DIR', BASE_DIR . 'app');
+defined('APP_DIR')  || define('APP_DIR', BASE_DIR . 'app');
 
 // Define application environment
 defined('APP_ENV') || define('APP_ENV',
