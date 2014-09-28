@@ -1,6 +1,7 @@
 <?php namespace SlimFit;
 
 use SlimFit\Config;
+use SlimFit\Error;
 
 /**
  * Global Router
@@ -84,20 +85,33 @@ class Router
 	}
 
 	private function _dispatch($route, $request)
-	{
+	{}
 
+	/**
+	 * Add route to storage
+	 *
+	 * @param string $uri Route uri
+	 * @param array $elements Route dynamic elements
+	 * @return Router
+	 */
+	public function addRoute($uri, $elements = [])
+	{
+		$this->_routes[$uri] = $elements;
+		return $this;
 	}
 
-	public function addRoute($url, $elements = [])
-	{
-		$this->_routes[$url] = $elements;
-	}
-
+	/**
+	 * Add routes to storage
+	 *
+	 * @param array $routes
+	 * @return Router
+	 */
 	public function addRoutes($routes)
 	{
 		foreach ($routes as $url => $elements) {
 			$this->_routes[$url] = $elements;
 		}
+		return $this;
 	}
 
 	/**
