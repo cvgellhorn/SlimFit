@@ -99,27 +99,7 @@ class Router
 			$this->_routes[$url] = $elements;
 		}
 	}
-	
-	/**
-	 * Get current router
-	 * 
-	 * @return SF_Router_Router
-	 */
-	public function getRouter()
-	{
-		return $this->_router;
-	}
-	
-	/**
-	 * Get current dispatcher
-	 * 
-	 * @return SF_Router_Dispatcher
-	 */
-	public function getDispatcher()
-	{
-		return $this->_dispatcher;
-	}
-	
+
 	/**
 	 * Do routing
 	 * 
