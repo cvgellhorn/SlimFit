@@ -1,5 +1,7 @@
 <?php namespace SlimFit;
 
+use SlimFit\Config;
+
 /**
  * Global Router
  * 
@@ -13,20 +15,20 @@ class Router
 	 * @return Router Instance
 	 */
 	private static $_instance = null;
-	
+
 	/**
-	 * SlimFit router
-	 * 
-	 * @var SF_Router_Router
+	 * Routes storage
+	 *
+	 * @var array
 	 */
-	private $_router;
-	
+	private $_routes = [];
+
 	/**
-	 * Dispatcher
-	 * 
-	 * @var \SlimFit\Router\Dispatcher
+	 * The path to look for controllers
+	 *
+	 * @var string
 	 */
-	private $_dispatcher;
+	public $classPath;
 	
 	/**
 	 * Single pattern implementation
@@ -44,44 +46,58 @@ class Router
 	
 	/**
 	 * Register routes
-	 * 
-	 * @param SF_Router_Route $route
 	 */
-	private function __construct($route = null)
+	private function __construct()
 	{
-		$this->_router = new SF_Router_Router;
-		if (null === $route) {
-			$mainUri = SF_Ini::get('base_path');
-			$controllerRoute = new SF_Router_Route($mainUri . ':class');
-			$controllerRoute->addDynamicElement(':class', ':class');
-			
-			$actionRoute = new SF_Router_Route($mainUri . ':class/:method');
-			$actionRoute->addDynamicElement(':class', ':class')
-				->addDynamicElement(':method', ':method');
-			
-			$route = new SF_Router_Route($mainUri . ':class/:method/:id');
-			$route->addDynamicElement(':class', ':class')
-				->addDynamicElement(':method', ':method')
-				->addDynamicElement(':id', ':id');
-			
-			$this->_router->addRoutes(array(
-				'_default_'			=> new SF_Router_Route(rtrim($mainUri, '/')),
-				'_controller_'		=> $controllerRoute,
-				'_action_'			=> $actionRoute,
-				'_actionWithParam_'	=> $route
-			));
-		} else {
-			if (is_array($route)) {
-				foreach ($route as $key => $r) {
-					$this->_router->addRoute($key, $r);
-				}
-			} else {
-				$this->_router->addRoute('_default_', $route);
+		$basePath = Config::get('base_path');
+
+		// Main route: slimfit.com
+		$mainRoute = [rtrim($basePath, '/') => []];
+
+		// Controller route: slimfit.com/user
+		$controllerRoute = [
+			$basePath . '{:class}' => ['class']
+		];
+
+		// Action route: slimfit.com/user/add
+		$actionRoute = [
+			$basePath . '{:class}/{:method}' => ['class', 'method']
+		];
+
+		// Param route: slimfit.com/user/get/23
+		$paramRoute = [
+			$basePath . '{:class}/{:method}/{:id}' => ['class', 'method', 'id']
+		];
+
+		$this->addRoutes([$mainRoute, $controllerRoute,	$actionRoute, $paramRoute]);
+		$this->classPath = realpath(APP_DIR . DS . 'controllers');
+	}
+
+	private function _findeRoute($uri)
+	{
+		$uri = rtrim($uri, '/');
+		foreach ($this->_routes as $route) {
+			if ($this->matchMap($uri)) {
+				return $route;
 			}
 		}
-		
-		$this->_dispatcher = new SF_Router_Dispatcher;
-		$this->_dispatcher->setClassPath(realpath(APP_PATH . DS . 'controllers'));
+	}
+
+	private function _dispatch($route, $request)
+	{
+
+	}
+
+	public function addRoute($url, $elements = [])
+	{
+		$this->_routes[$url] = $elements;
+	}
+
+	public function addRoutes($routes)
+	{
+		foreach ($routes as $url => $elements) {
+			$this->_routes[$url] = $elements;
+		}
 	}
 	
 	/**
@@ -112,18 +128,13 @@ class Router
 	public function route($request = null)
 	{
 		try {
-			$this->_dispatcher->dispatch(
-				$this->_router->findRoute($request->getUri()),
-				$request
-			);
-		} catch (Router_RouteNotFoundException $exception) {
-			echo 'Router_RouteNotFoundException --- HIER UMLEITEN';
-		} catch (Router_BadClassNameException $exception) {
-			echo 'Router_BadClassNameException --- HIER UMLEITEN';
-		} catch (Router_ClassFileNotFoundException $exception) {
-			echo 'Router_ClassFileNotFoundException --- HIER UMLEITEN';
-		} catch (Router_ClassMethodNotFoundException $exception) {
-			echo 'Router_ClassMethodNotFoundException --- HIER UMLEITEN';
+			// Try loading route from uri
+			$route = $this->_findeRoute($request->getUri());
+
+			// Try dispatching controller action
+			$this->_dispatch($route, $request);
+		} catch (Error $exception) {
+
 		}
 	}
 }
