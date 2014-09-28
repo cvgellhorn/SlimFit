@@ -127,7 +127,7 @@ class Router
 
 			// Try dispatching controller action
 			$this->_dispatch($route, $request);
-		} catch (Error $exception) {
+		} catch (Error $e) {
 
 		}
 	}
