@@ -90,6 +90,12 @@ class Router
 		}
 	}
 
+	/**
+	 * Dispatch to given controller action
+	 *
+	 * @param array $route Matched route
+	 * @param Request $request Request object
+	 */
 	private function _dispatch($route, $request)
 	{}
 
