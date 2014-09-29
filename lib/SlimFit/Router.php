@@ -74,13 +74,19 @@ class Router
 		$this->classPath = realpath(APP_DIR . DS . 'controllers');
 	}
 
+	/**
+	 * Find and match current request uri
+	 *
+	 * @param string $uri Request uri
+	 * @return array Matched route
+	 */
 	private function _findeRoute($uri)
 	{
 		$uri = rtrim($uri, '/');
 		foreach ($this->_routes as $route) {
-			if ($this->matchMap($uri)) {
+			/*if ($this->matchMap($uri)) {
 				return $route;
-			}
+			}*/
 		}
 	}
 
