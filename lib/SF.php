@@ -99,7 +99,10 @@ final class SF
 	 */
 	public static function run()
 	{
+		// Set application config
 		Config::init();
+
+		// Route to controller action
 		Router::load()->route(Request::load());
 	}
 }
