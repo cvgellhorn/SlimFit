@@ -1,4 +1,4 @@
-<?php
+<?php namespace SlimFit;
 
 use SlimFit\Config;
 use SlimFit\Request;
