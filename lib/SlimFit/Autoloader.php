@@ -13,7 +13,27 @@ class Autoloader
 	 * @var bool
 	 */
 	private static $_registered = false;
-	
+
+	/**
+	 * Global class aliases
+	 *
+	 * @var array
+	 */
+	private static $_classAliases = [
+		'SF'     => '\SlimFit\SF',
+		'Config' => '\SlimFit\Config'
+	];
+
+	/**
+	 * Register global class aliases for easier access
+	 */
+	private static function _registerAliases()
+	{
+		foreach (self::$_classAliases as $alias => $class) {
+			class_alias($class, $alias);
+		}
+	}
+
 	/**
 	 * Register the autoloader
 	 */
@@ -21,6 +41,7 @@ class Autoloader
 	{
 		if (!self::$_registered) {
 			self::$_registered = spl_autoload_register(['self', 'load']);
+			self::_registerAliases();
 		}
 	}
 
