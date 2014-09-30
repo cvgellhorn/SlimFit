@@ -4,6 +4,8 @@ use SlimFit\Error;
 
 /**
  * SlimFit Configuration
+ *
+ * Class alias registerd in \SlimFit\Autoloader
  * 
  * @author cvgellhorn
  */
@@ -32,9 +34,6 @@ class Config
 	 */
 	public static function init()
 	{
-		// Register global alias for faster access
-		class_alias('\SlimFit\Config', 'Config');
-
 		$file = APP_DIR . DS . 'config' . DS . self::FILENAME;
 		$config = require_once($file);
 
