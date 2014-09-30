@@ -22,4 +22,4 @@ require_once('SlimFit/Autoloader.php');
 \SlimFit\Autoloader::register();
 
 // Run SlimFit application
-SF::run();
+\SlimFit\SF::run();
