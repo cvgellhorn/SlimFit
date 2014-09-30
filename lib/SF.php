@@ -14,9 +14,9 @@ final class SF
 	/**
 	 * Application log files
 	 */
-	const LOG_FILE_SYSTEM	= 'system.log';
-	const LOG_FILE_DEBUG	= 'debug.log';
-	const LOG_FILE_ERROR	= 'error.log';
+	const LOG_FILE_SYSTEM = 'system.log';
+	const LOG_FILE_DEBUG  = 'debug.log';
+	const LOG_FILE_ERROR  = 'error.log';
 
     /**
      * Private array of instances
