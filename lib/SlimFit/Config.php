@@ -32,7 +32,7 @@ class Config
 	 */
 	public static function init()
 	{
-		// Global alias for faster access
+		// Register global alias for faster access
 		class_alias('\SlimFit\Config', 'Config');
 
 		$file = APP_DIR . DS . 'config' . DS . self::FILENAME;
