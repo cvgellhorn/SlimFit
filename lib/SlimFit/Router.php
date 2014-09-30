@@ -71,7 +71,10 @@ class Router
 		];
 
 		$this->addRoutes([$mainRoute, $controllerRoute,	$actionRoute, $paramRoute]);
-		$this->classPath = realpath(APP_DIR . DS . 'controllers');
+
+		// Should be the correct path
+		$this->classPath = APP_DIR . DS . 'controllers';
+		//$this->classPath = realpath(APP_DIR . DS . 'controllers');
 	}
 
 	/**
@@ -123,6 +126,7 @@ class Router
 		foreach ($routes as $url => $elements) {
 			$this->_routes[$url] = $elements;
 		}
+
 		return $this;
 	}
 
