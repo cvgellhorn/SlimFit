@@ -1,7 +1,7 @@
 <?php namespace SlimFit;
 
 use Exception;
-use SF;
+use SLimFit\SF;
 
 /**
  * Main exception class
