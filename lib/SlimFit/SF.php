@@ -20,12 +20,12 @@ final class SF
 	const LOG_FILE_DEBUG  = 'debug.log';
 	const LOG_FILE_ERROR  = 'error.log';
 
-    /**
-     * Private array of instances
-     * 
-     * @var array
-     */
-    private static $_instances = [];
+	/**
+	 * Private array of instances
+	 *
+	 * @var array
+	 */
+	private static $_instances = [];
 	
 	/**
 	 * Check if application is in dev mode
