@@ -6,6 +6,8 @@ use SlimFit\Router;
 
 /**
  * Main SlimFit class
+ *
+ * Class alias registerd in \SlimFit\Autoloader
  * 
  * @author cvgellhorn
  */
