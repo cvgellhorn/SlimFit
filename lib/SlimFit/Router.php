@@ -72,9 +72,8 @@ class Router
 
 		$this->addRoutes([$mainRoute, $controllerRoute,	$actionRoute, $paramRoute]);
 
-		// Should be the correct path
+		// Set controller path
 		$this->classPath = APP_DIR . DS . 'controllers';
-		//$this->classPath = realpath(APP_DIR . DS . 'controllers');
 	}
 
 	/**
