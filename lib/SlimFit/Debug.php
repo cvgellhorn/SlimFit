@@ -66,8 +66,9 @@ class Debug
                     . PHP_EOL . $output
                     . PHP_EOL;
         } else {
-            if(!extension_loaded('xdebug')) {
+            if (!extension_loaded('xdebug')) {
                 $flags = ENT_QUOTES;
+
                 // PHP 5.4.0+
                 if (defined('ENT_SUBSTITUTE')) {
                     $flags = ENT_QUOTES | ENT_SUBSTITUTE;
@@ -81,9 +82,8 @@ class Debug
                     . '</pre>';
         }
 
-        if ($echo) {
-            echo($output);
-        }
+        if ($echo) echo $output;
+
         return $output;
     }
 }
