@@ -131,77 +131,77 @@ class Request
 	}
 	
 	/**
-     * Set an action parameter
-     *
-     * A $value of null will unset the $key if it exists
-     *
-     * @param string $key
-     * @param mixed $val
-     * @return Request
-     */
+	 * Set an action parameter
+	 *
+	 * A $value of null will unset the $key if it exists
+	 *
+	 * @param string $key
+	 * @param mixed $val
+	 * @return Request
+	 */
 	public function setParam($key, $val)
 	{
 		$key = (string)$key;
 
-        if ((null === $val) && isset($this->_params[$key])) {
-            unset($this->_params[$key]);
-        } elseif (null !== $val) {
-            $this->_params[$key] = $val;
-        }
-		
+		if ((null === $val) && isset($this->_params[$key])) {
+		    unset($this->_params[$key]);
+		} elseif (null !== $val) {
+		    $this->_params[$key] = $val;
+		}
+
 		return $this;
 	}
 	
 	/**
-     * Get an action parameter
-     *
-     * @param string $key
-     * @param mixed $default Default value to use if key not found
-     * @return mixed
-     */
+	 * Get an action parameter
+	 *
+	 * @param string $key
+	 * @param mixed $default Default value to use if key not found
+	 * @return mixed
+	 */
 	public function getParam($key, $default = null)
 	{
-        if (isset($this->_params[$key])) {
-            return $this->_params[$key];
-        } elseif (isset($_GET[$key])) {
-            return $_GET[$key];
-        } elseif (isset($_POST[$key])) {
-            return $_POST[$key];
-        }
+		if (isset($this->_params[$key])) {
+		    return $this->_params[$key];
+		} elseif (isset($_GET[$key])) {
+		    return $_GET[$key];
+		} elseif (isset($_POST[$key])) {
+		    return $_POST[$key];
+		}
 
-        return $default;
+		return $default;
 	}
 	
 	/**
-     * Get all action parameters
-     *
-     * @return array Request params
-     */
+	 * Get all action parameters
+	 *
+	 * @return array Request params
+	 */
 	public function getParams()
 	{
 		return $this->_params;
 	}
 	
 	/**
-     * Unset all user parameters
-     *
-     * @return Request
-     */
-    public function clearParams()
-    {
-        $this->_params = [];
-        return $this;
-    }
+	 * Unset all user parameters
+	 *
+	 * @return Request
+	 */
+	public function clearParams()
+	{
+		$this->_params = [];
+		return $this;
+	}
 	
 	/**
-     * Retrieve a member of the $_SERVER superglobal
-     *
-     * If no $key is passed, returns the entire $_SERVER array.
-     *
-     * @param string $key
-     * @param mixed $default Default value to use if key not found
-     * @return mixed Returns null if key does not exist
-     */
+	 * Retrieve a member of the $_SERVER superglobal
+	 *
+	 * If no $key is passed, returns the entire $_SERVER array.
+	 *
+	 * @param string $key
+	 * @param mixed $default Default value to use if key not found
+	 * @return mixed Returns null if key does not exist
+	 */
 	public function getServer($key = null, $default = null)
 	{
 		if (null === $key) return $_SERVER;
@@ -210,14 +210,14 @@ class Request
 	}
 	
 	/**
-     * Retrieve a member of the $_GET superglobal
-     *
-     * If no $key is passed, returns the entire $_GET array.
-     *
-     * @param string $key
-     * @param mixed $default Default value to use if key not found
-     * @return mixed Returns null if key does not exist
-     */
+	 * Retrieve a member of the $_GET superglobal
+	 *
+	 * If no $key is passed, returns the entire $_GET array.
+	 *
+	 * @param string $key
+	 * @param mixed $default Default value to use if key not found
+	 * @return mixed Returns null if key does not exist
+	 */
 	public function GET($key = null, $default = null)
 	{
 		if (null === $key) return $_GET;
@@ -226,14 +226,14 @@ class Request
 	}
 	
 	/**
-     * Retrieve a member of the $_POST superglobal
-     *
-     * If no $key is passed, returns the entire $_POST array.
-     *
-     * @param string $key
-     * @param mixed $default Default value to use if key not found
-     * @return mixed Returns null if key does not exist
-     */
+	 * Retrieve a member of the $_POST superglobal
+	 *
+	 * If no $key is passed, returns the entire $_POST array.
+	 *
+	 * @param string $key
+	 * @param mixed $default Default value to use if key not found
+	 * @return mixed Returns null if key does not exist
+	 */
 	public function POST($key = null, $default = null)
 	{
 		if (null === $key) return $_POST;
@@ -242,13 +242,13 @@ class Request
 	}
 	
 	/**
-     * Return the value of the given HTTP header. Pass the header name as the
-     * plain, HTTP-specified header name. Ex.: Ask for 'Accept' to get the
-     * Accept header, 'Accept-Encoding' to get the Accept-Encoding header.
-     *
-     * @param string $header HTTP header name
-     * @return string|false HTTP header value, or false if not found
-     */
+	 * Return the value of the given HTTP header. Pass the header name as the
+	 * plain, HTTP-specified header name. Ex.: Ask for 'Accept' to get the
+	 * Accept header, 'Accept-Encoding' to get the Accept-Encoding header.
+	 *
+	 * @param string $header HTTP header name
+	 * @return string|false HTTP header value, or false if not found
+	 */
 	public function getHeader($header)
 	{
 		// Try to get it from the $_SERVER array first
@@ -270,10 +270,10 @@ class Request
     }
 	
 	/**
-     * Return the method by which the request was made
-     *
-     * @return string
-     */
+	 * Return the method by which the request was made
+	 *
+	 * @return string
+	 */
 	public function getMethod()
 	{
 		return $this->getServer('REQUEST_METHOD');
@@ -286,7 +286,7 @@ class Request
 	 */
 	public function isPOST()
 	{
-		return ('POST' == $this->getMethod()) ? true : false;
+		return ('POST' == $this->getMethod());
 	}
 
 	/**
@@ -296,17 +296,17 @@ class Request
 	 */
 	public function isGET()
 	{
-		return ('GET' == $this->getMethod()) ? true : false;
+		return ('GET' == $this->getMethod());
 	}
 	
 	/**
-     * Is the request a Javascript XMLHttpRequest?
-     *
-     * Should work with: 
+	 * Is the request a Javascript XMLHttpRequest?
+	 *
+	 * Should work with:
 	 * jQuery/Prototype/Script.aculo.us/Yahoo! UI Library/MochiKit
-     *
-     * @return boolean
-     */
+	 *
+	 * @return boolean
+	 */
 	public function isAjax()
 	{
 		return ($this->getHeader('X_REQUESTED_WITH') == 'XMLHttpRequest');
