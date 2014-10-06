@@ -54,7 +54,7 @@ class Debug
         // Format the label
         $label = ($label === null) ? '' : rtrim($label) . ' ';
 
-        // var_dump the variable into a buffer and keep the output
+        // Dump the variable into a buffer and keep the output
         ob_start();
         var_dump($var);
         $output = ob_get_clean();
@@ -67,11 +67,8 @@ class Debug
                     . PHP_EOL;
         } else {
             if (!extension_loaded('xdebug')) {
-                $flags = ENT_QUOTES;
-
-                // PHP 5.4.0+
-                if (defined('ENT_SUBSTITUTE')) $flags = ENT_QUOTES | ENT_SUBSTITUTE;
-
+	            // PHP 5.4.0+
+	            $flags = (defined('ENT_SUBSTITUTE')) ? ENT_QUOTES | ENT_SUBSTITUTE : ENT_QUOTES;
                 $output = htmlspecialchars($output, $flags);
             }
 
@@ -79,7 +76,6 @@ class Debug
         }
 
         if ($echo) echo $output;
-
         return $output;
     }
 }
