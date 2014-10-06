@@ -14,7 +14,7 @@ defined('APP_ENV') || define('APP_ENV',
 // Set include path
 set_include_path(implode(PATH_SEPARATOR, [
 	BASE_DIR . 'lib',
-    get_include_path(),
+	get_include_path(),
 ]));
 
 // Register autoloader
