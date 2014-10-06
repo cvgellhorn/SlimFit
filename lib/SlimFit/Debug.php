@@ -70,16 +70,12 @@ class Debug
                 $flags = ENT_QUOTES;
 
                 // PHP 5.4.0+
-                if (defined('ENT_SUBSTITUTE')) {
-                    $flags = ENT_QUOTES | ENT_SUBSTITUTE;
-                }
+                if (defined('ENT_SUBSTITUTE')) $flags = ENT_QUOTES | ENT_SUBSTITUTE;
+
                 $output = htmlspecialchars($output, $flags);
             }
 
-            $output = '<pre>'
-                    . $label
-                    . $output
-                    . '</pre>';
+            $output = '<pre>' . $label . $output . '</pre>';
         }
 
         if ($echo) echo $output;
