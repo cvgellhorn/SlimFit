@@ -34,7 +34,7 @@ final class SF
 	 */
 	public static function dev()
 	{
-		return (APP_ENV == 'development') ? true : false;
+		return (APP_ENV == 'development');
 	}
 	
 	/**
