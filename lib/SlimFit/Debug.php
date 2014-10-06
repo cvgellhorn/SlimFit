@@ -20,7 +20,7 @@ class Debug
      */
     public static function getSapi()
     {
-        if (self::$_sapi === null) {
+        if (null === self::$_sapi) {
             self::$_sapi = PHP_SAPI;
         }
 
