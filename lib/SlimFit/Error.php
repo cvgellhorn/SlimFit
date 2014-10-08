@@ -8,7 +8,7 @@ use SlimFit\SF;
  * 
  * @author cvgellhorn
  */
-class Error extends Exception
+class Error extends \Exception
 {
 	/**
 	 * Constructor of exceptions class
