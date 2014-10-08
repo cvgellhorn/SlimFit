@@ -12,10 +12,10 @@ use SlimFit\SF;
 class Orc extends Exception
 {
 	/**
-	 * Constructor of exceptions class
+	 * Mordor
 	 * 
-	 * @param string @message Exception message
-	 * @param int @code Exception code
+	 * @param string @message Orcs mission
+	 * @param int @code Orcs id
 	 */
 	public function __construct($message = null, $code = null) 
 	{
