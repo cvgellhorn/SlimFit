@@ -1,7 +1,7 @@
 <?php namespace SlimFit\Router;
 
 use SlimFit\Controller;
-use SlimFit\Exception;
+use SlimFit\Orc;
 
 /**
  * Original Version:
@@ -107,7 +107,7 @@ class Dispatcher
 	 * @param string $controller
 	 * @param string $action
 	 * @param array $args
-	 * @throws Exception
+	 * @throws Orc
 	 */
 	protected function dispatchController($controller, $action, $args)
 	{
@@ -118,7 +118,7 @@ class Dispatcher
 			$obj->__loadView();
 			$obj->postDispatch();
 		} else {
-			throw new Exception($controller . ' is not an instance of \SlimFit\Controller');
+			throw new Orc($controller . ' is not an instance of \SlimFit\Controller');
 		}
 	}
 

@@ -1,6 +1,6 @@
 <?php namespace SlimFit;
 
-use SlimFit\Exception;
+use SlimFit\Orc;
 
 /**
  * SlimFit Configuration
@@ -38,7 +38,7 @@ class Config
 		$config = require_once($file);
 
 		if (!isset($config[self::ENV_LIVE])) {
-			throw new Exception('No production configuration found');
+			throw new Orc('No production configuration found');
 		}
 
 		// Merge environment config data
