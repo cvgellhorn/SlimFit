@@ -1,6 +1,6 @@
 <?php namespace SlimFit;
 
-use SlimFit\Error;
+use SlimFit\Exception;
 
 /**
  * SlimFit Configuration
@@ -38,7 +38,7 @@ class Config
 		$config = require_once($file);
 
 		if (!isset($config[self::ENV_LIVE])) {
-			throw new Error('No production configuration found');
+			throw new Exception('No production configuration found');
 		}
 
 		// Merge environment config data

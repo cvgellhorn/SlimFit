@@ -3,7 +3,7 @@
 use SlimFit\Config;
 use SlimFit\Request;
 use SlimFit\Router;
-use SlimFit\Error;
+use SlimFit\Exception;
 
 /**
  * Main SlimFit View
@@ -17,7 +17,7 @@ class View
 	 *
 	 * @param string $action Current action name 
 	 * @param string $controller Current controller name
-	 * @throws Error
+	 * @throws Exception
 	 */
 	public function loadView($action, $controller)
 	{
@@ -26,7 +26,7 @@ class View
 		if (file_exists($viewPath)) {
 			require_once($viewPath);
 		} else {
-			throw new Error('Could not load action view: ' . $controller.'/'.$action
+			throw new Exception('Could not load action view: ' . $controller.'/'.$action
 				. '. File does not exist: ' . $action . '.phtml');
 		}
 	}

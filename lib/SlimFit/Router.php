@@ -1,7 +1,7 @@
 <?php namespace SlimFit;
 
 use SlimFit\Config;
-use SlimFit\Error;
+use SlimFit\Exception;
 
 /**
  * Global Router
@@ -142,7 +142,7 @@ class Router
 
 			// Try dispatching controller action
 			$this->_dispatch($route, $request);
-		} catch (Error $e) {
+		} catch (Exception $e) {
 
 		}
 	}

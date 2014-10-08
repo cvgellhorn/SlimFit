@@ -1,6 +1,6 @@
 <?php namespace SlimFit;
 
-use SlimFit\Error;
+use SlimFit\Exception;
 
 /**
  * Layout Handler
@@ -76,7 +76,7 @@ class Layout
 	/**
 	 * Load view from controller action with default layout
 	 *
-	 * @throws Error If main template not exists
+	 * @throws Exception If main template not exists
 	 */
 	public function loadView()
 	{
@@ -86,7 +86,7 @@ class Layout
 		if (file_exists($layoutPath)) {
 			require_once($layoutPath);
 		} else {
-			throw new Error('Layout template does not exists: ' . $layoutFile);
+			throw new Exception('Layout template does not exists: ' . $layoutFile);
 		}
 	}
 

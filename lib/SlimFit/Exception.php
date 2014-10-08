@@ -1,6 +1,5 @@
 <?php namespace SlimFit;
 
-use Exception;
 use SlimFit\SF;
 
 /**
@@ -8,7 +7,7 @@ use SlimFit\SF;
  * 
  * @author cvgellhorn
  */
-class Error extends \Exception
+class Exception extends \Exception
 {
 	/**
 	 * Constructor of exceptions class

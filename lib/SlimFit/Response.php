@@ -1,6 +1,6 @@
 <?php namespace SlimFit;
 
-use SlimFit\Error;
+use SlimFit\Exception;
 
 /**
  * Response
@@ -78,12 +78,12 @@ class Response
 	 * 
 	 * @param int $code Response code
 	 * @return Response
-	 * @throws Error
+	 * @throws Exception
 	 */
 	public function setHttpResponseCode($code)
 	{
 		if (!is_int($code) || (100 > $code) || (599 < $code)) {
-            throw new Error('Invalid HTTP response code');
+            throw new Exception('Invalid HTTP response code');
         }
 
         if ((300 <= $code) && (307 >= $code)) {
