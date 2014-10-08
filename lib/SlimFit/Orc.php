@@ -1,13 +1,15 @@
 <?php namespace SlimFit;
 
+use Exception;
 use SlimFit\SF;
 
 /**
- * Main exception class
+ * Catch all the Orcs!
+ * They will destroy you, if you let them. Don't let them win, you're the choosen one!
  * 
  * @author cvgellhorn
  */
-class Exception extends \Exception
+class Orc extends Exception
 {
 	/**
 	 * Constructor of exceptions class
