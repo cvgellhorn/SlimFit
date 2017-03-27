@@ -5,5 +5,5 @@ A simple mvc based PHP skeleton framework.
 
 Still refactoring... 
 
-##Requirements
+## Requirements
 * Min. PHP 5.4.x
